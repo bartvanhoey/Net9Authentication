@@ -10,7 +10,7 @@ public static class DatabaseRegistration
     {
         var connectionString = webApplicationBuilder.Configuration.GetConnectionString("DefaultConnection") ??
                                throw new InvalidOperationException("Connection string not found");
-        webApplicationBuilder.Services.AddDbContext<DataContext>(options =>
+        webApplicationBuilder.Services.AddDbContext<ApplicationDbContext>(options =>
             options.UseSqlServer(connectionString));
     }
 

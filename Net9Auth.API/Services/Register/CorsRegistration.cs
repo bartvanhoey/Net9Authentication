@@ -9,7 +9,6 @@ public static class CorsRegistration
         var validAudiences = builder.Configuration.GetSection("Jwt:ValidAudiences").Get<List<string>>()
                              ?? throw new InvalidOperationException("'Audience' not found.");
 
-
         foreach (var validAudience in validAudiences) WriteLine($"Cors validAudience: {validAudience}");
 
         builder.Services.AddCors(options =>
