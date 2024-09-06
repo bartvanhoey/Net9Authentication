@@ -13,8 +13,6 @@ public class SecureWeatherForecastController(ILogger<WeatherForecastController> 
         "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
     };
 
-    private readonly ILogger<WeatherForecastController> _logger = logger;
-
     [HttpGet]
     public IEnumerable<WeatherForecast> Get()
     {
