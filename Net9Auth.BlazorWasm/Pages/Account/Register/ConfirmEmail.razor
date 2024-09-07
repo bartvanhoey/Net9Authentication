@@ -1,0 +1,51 @@
+@page "/Account/ConfirmEmail"
+
+@using Net9Auth.BlazorWasm.Services.Authentication.ConfirmEmail
+@using Net9Auth.Shared.Models.Authentication.ConfirmEmail
+@inject NavigationManager NavigationManager
+@inject IConfirmEmailService ConfirmEmailService
+
+<PageTitle>Confirm email</PageTitle>
+
+<h2>Confirm email</h2>
+<hr/>
+
+<div class="row">
+    <div class="col-md-6">
+        <StatusMessage Message="@Message"/>
+        <button type="button" class="w-100 btn btn-lg btn-primary" @onclick="ConfirmEmailAsync">Confirm</button>
+    </div>
+</div>
+
+
+@code {
+
+    // ReSharper disable once UnusedAutoPropertyAccessor.Local
+    [SupplyParameterFromQuery] private string? UserId { get; set; }
+
+    // ReSharper disable once UnusedAutoPropertyAccessor.Local
+    [SupplyParameterFromQuery] private string? Code { get; set; }
+    private string? Message { get; set; }
+
+    protected override Task OnInitializedAsync()
+    {
+        if (UserId is null || Code is null) NavigationManager!.NavigateTo("/");
+        return Task.CompletedTask;
+    }
+
+
+    private async Task ConfirmEmailAsync(MouseEventArgs e)
+    {
+        if (UserId == null || Code == null)
+        {
+            Message = "Confirmation went wrong";
+            return;
+        }
+
+        var result = await ConfirmEmailService.ConfirmEmailAsync(new ConfirmEmailInputModel(UserId, Code));
+        if (result.Succeeded) NavigationManager!.NavigateTo("/");
+        else
+            Message = "The system couldn't confirm your email";
+    }
+
+}

@@ -5,6 +5,7 @@ using Net9Auth.API.Infrastructure.Extensions;
 using Net9Auth.API.Models;
 using Net9Auth.API.Models.Authentication;
 using Net9Auth.API.Models.Authentication.Register;
+using Net9Auth.Shared.Models.Authentication.Register;
 using static System.Activator;
 using static System.Text.Encoding;
 using static Microsoft.AspNetCore.WebUtilities.WebEncoders;

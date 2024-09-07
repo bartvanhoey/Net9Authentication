@@ -1,3 +1,5 @@
+using Net9Auth.Shared.Models.Authentication;
+
 namespace Net9Auth.API.Models.Authentication.Register;
 
 public class RegisterResponse : IControllerResponse

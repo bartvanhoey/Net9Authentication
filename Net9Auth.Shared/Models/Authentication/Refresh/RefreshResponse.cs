@@ -1,20 +1,18 @@
-using Net9Auth.Shared.Models.Authentication;
+﻿namespace Net9Auth.Shared.Models.Authentication.Refresh;
 
-namespace Net9Auth.API.Models.Authentication.Login;
-
-public class LoginResponse : IControllerResponse
+public class RefreshResponse : IControllerResponse
 {
-    public LoginResponse()
+    public RefreshResponse()
     {
     }
 
-    public LoginResponse(string? status, string? message)
+    public RefreshResponse(string? status, string? message)
     {
         Status = status;
         Message = message;
     }
 
-    public LoginResponse(string? accessToken, string refreshToken, DateTime validTo) : this()
+    public RefreshResponse(string? accessToken, string refreshToken, DateTime validTo) : this()
     {
         AccessToken = accessToken;
         RefreshToken = refreshToken;

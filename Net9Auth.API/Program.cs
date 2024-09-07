@@ -23,6 +23,7 @@ try
 
     builder.Services.AddOpenApi();
 
+    builder.RegisterSwagger();
     builder.RegisterDatabase();
 
     builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = true)
@@ -37,29 +38,30 @@ try
     
     Log.Information("Services registered");
 }
-catch (Exception e)
+catch (Exception exception)
 {
-    Console.WriteLine(e);
-    throw;
+    Log.Fatal(exception, "host terminated unexpectedly");
 }
 
-
-
-
-
-
 var app = builder.Build();
+
+app.UseSerilogRequestLogging();
 
 
 if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
+    app.UseSwagger();
+    app.UseSwaggerUI();
 }
 
 app.UseHttpsRedirection();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
+
+app.UseCors("CorsPolicy");
 
 app.Run();

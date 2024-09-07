@@ -1,0 +1,50 @@
+@using Blazored.LocalStorage
+@using Microsoft.AspNetCore.Components.Authorization
+@using Net9Auth.BlazorWasm.Services.Authentication.Logout
+@inject ILocalStorageService LocalStorage
+@inject AuthenticationStateProvider AuthenticationStateProvider
+@inject NavigationManager NavigationManager
+@inject ILogoutService LogoutService
+
+<div class="dropdown">
+    <button @onclick="ToggleUserMenu"
+            @onfocusout="HideUserMenu"
+            class="btn btn-secondary dropdown-toggle user-button">
+        <PersonFillIcon />
+          
+    </button>
+    <div class="dropdown-menu dropdown-menu-right @UserMenuCssClass">
+        <AuthorizeView>
+            <Authorized>
+                <a href="Account/Manage/Profile" class="dropdown-item">Profile</a>
+                <a href="orders" class="dropdown-item">Orders</a>
+                <hr/>
+                <button class="dropdown-item" @onclick="Logout">Logout</button>
+            </Authorized>
+            <NotAuthorized>
+                <a href="/account/login?returnUrl=@NavigationManager.ToBaseRelativePath(NavigationManager.Uri)" class="dropdown-item">Login</a>
+                <a href="/account/register" class="dropdown-item">Register</a>
+            </NotAuthorized>
+        </AuthorizeView>
+    </div>
+</div>
+
+@code {
+    private bool _showUserMenu = false;
+
+    private string UserMenuCssClass => _showUserMenu ? "show-menu" : "";
+
+    private void ToggleUserMenu() => _showUserMenu = !_showUserMenu;
+
+    private async Task HideUserMenu()
+    {
+        await Task.Delay(200);
+        _showUserMenu = false;
+    }
+
+    private async Task Logout()
+    {
+        await LogoutService.LogoutAsync();
+        NavigationManager.NavigateTo("/Account/Login");
+    }
+}

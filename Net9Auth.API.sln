@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.10.35004.147
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Net9Auth.API", "Net9Auth.API/Net9Auth.API.csproj", "{7E9A23F3-D485-419A-BC24-B927B18F6B60}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Net9Auth.BlazorWasm", "Net9Auth.BlazorWasm\Net9Auth.BlazorWasm.csproj", "{5BF8C6DD-E228-4238-AA47-186E09A5B701}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Net9Auth.Shared", "Net9Auth.Shared\Net9Auth.Shared.csproj", "{08ABCA17-2732-4005-9DA0-80889C24F024}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7E9A23F3-D485-419A-BC24-B927B18F6B60}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7E9A23F3-D485-419A-BC24-B927B18F6B60}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7E9A23F3-D485-419A-BC24-B927B18F6B60}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7E9A23F3-D485-419A-BC24-B927B18F6B60}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5BF8C6DD-E228-4238-AA47-186E09A5B701}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5BF8C6DD-E228-4238-AA47-186E09A5B701}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5BF8C6DD-E228-4238-AA47-186E09A5B701}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5BF8C6DD-E228-4238-AA47-186E09A5B701}.Release|Any CPU.Build.0 = Release|Any CPU
+		{08ABCA17-2732-4005-9DA0-80889C24F024}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{08ABCA17-2732-4005-9DA0-80889C24F024}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{08ABCA17-2732-4005-9DA0-80889C24F024}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{08ABCA17-2732-4005-9DA0-80889C24F024}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {BF7DD21E-62E7-4586-A138-7501C2B90145}
+	EndGlobalSection
+EndGlobal

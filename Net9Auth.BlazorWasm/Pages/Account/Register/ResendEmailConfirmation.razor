@@ -1,0 +1,43 @@
+@page "/Account/ResendEmailConfirmation"
+@using Net9Auth.BlazorWasm.Services.Authentication.ResendEmailConfirmation
+@using Net9Auth.Shared.Models.Authentication.ResendEmailConfirmation
+@inject IResendEmailConfirmationService ResendEmailConfirmationService
+
+<PageTitle>Resend Email Confirmation</PageTitle>
+
+<StatusMessage Message="@_message"/>
+<div class="row">
+    <div class="col-md-6">
+        <EditForm Model="Input" FormName="resend-email-confirmation" OnValidSubmit="OnValidSubmitAsync" method="post">
+            <DataAnnotationsValidator/>
+            <h2>Resend email confirmation</h2>
+            <hr/>
+            <ValidationSummary class="text-danger" role="alert"/>
+            <div class="form-floating mb-3">
+                <InputText id="email" @bind-Value="Input.Email" class="form-control"
+                           aria-required="true" autocomplete="username"/>
+                <label for="email" class="form-label">Enter your email...</label>
+                <ValidationMessage For="() => Input.Email" class="text-danger"/>
+            </div>
+            <button type="submit" class="w-100 btn btn-lg btn-primary">Resend</button>
+        </EditForm>
+    </div>
+</div>
+
+@code {
+    private string? _message;
+
+    // ReSharper disable once AutoPropertyCanBeMadeGetOnly.Local
+    [SupplyParameterFromForm] private ResendEmailConfirmationInputModel Input { get; set; } = new();
+
+    private async Task OnValidSubmitAsync()
+    {
+        var result = await ResendEmailConfirmationService.ResendEmailConfirmationAsync(Input);
+        if (result.Succeeded)
+        {
+            _message = "Verification email sent. Please check your email.";
+            return;
+        }
+        _message = "Error: Resend email confirmation went wrong.";
+    }
+}
