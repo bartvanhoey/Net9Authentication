@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 
-namespace Net9Auth.API.Controllers;
+namespace Net9Auth.API.Controllers.Weatherforecast;
 
 [ApiController]
 [Route("api/weather-forecast")]

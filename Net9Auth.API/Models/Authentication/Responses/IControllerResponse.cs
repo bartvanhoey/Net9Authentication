@@ -1,4 +1,6 @@
-namespace Net9Auth.Shared.Models.Authentication;
+using Net9Auth.Shared.Models.Authentication;
+
+namespace Net9Auth.API.Models.Authentication.Responses;
 
 
 public interface IControllerResponse

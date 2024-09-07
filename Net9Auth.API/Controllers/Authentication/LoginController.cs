@@ -4,13 +4,13 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Net9Auth.API.Controllers.Authentication.Base;
 using Net9Auth.API.Models;
-using Net9Auth.API.Models.Authentication.Login;
+using Net9Auth.API.Models.Authentication.Responses.Login;
 using Net9Auth.Shared.Models.Authentication.Login;
 using static System.DateTime;
 using static Microsoft.AspNetCore.Http.StatusCodes;
 using Convert = System.Convert;
 
-namespace Net9Auth.API.Controllers.Authentication.Login;
+namespace Net9Auth.API.Controllers.Authentication;
 
 [Route("api/account")]
 [ApiController]

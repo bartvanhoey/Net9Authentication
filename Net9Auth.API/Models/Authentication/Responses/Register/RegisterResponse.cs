@@ -1,6 +1,6 @@
 using Net9Auth.Shared.Models.Authentication;
 
-namespace Net9Auth.API.Models.Authentication.Register;
+namespace Net9Auth.API.Models.Authentication.Responses.Register;
 
 public class RegisterResponse : IControllerResponse
 {

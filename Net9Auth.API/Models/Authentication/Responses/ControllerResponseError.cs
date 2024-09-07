@@ -1,4 +1,4 @@
-namespace Net9Auth.Shared.Models.Authentication;
+namespace Net9Auth.API.Models.Authentication.Responses;
 
 public class ControllerResponseError(string code, string description)
 {

@@ -1,6 +1,6 @@
 using Net9Auth.Shared.Models.Authentication;
 
-namespace Net9Auth.API.Models.Authentication.Login;
+namespace Net9Auth.API.Models.Authentication.Responses.Login;
 
 public class LoginResponse : IControllerResponse
 {

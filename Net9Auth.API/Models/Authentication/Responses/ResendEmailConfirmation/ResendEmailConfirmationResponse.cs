@@ -1,5 +1,5 @@
 // ReSharper disable UnusedAutoPropertyAccessor.Global
-namespace Net9Auth.Shared.Models.Authentication.ResendEmailConfirmation;
+namespace Net9Auth.API.Models.Authentication.Responses.ResendEmailConfirmation;
 
 public class ResendEmailConfirmationResponse
 {

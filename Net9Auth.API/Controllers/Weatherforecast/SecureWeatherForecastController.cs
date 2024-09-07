@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Net9Auth.API.Controllers;
+namespace Net9Auth.API.Controllers.Weatherforecast;
 
 [Authorize]
 [ApiController]
