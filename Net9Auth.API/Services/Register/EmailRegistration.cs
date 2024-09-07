@@ -11,9 +11,9 @@ public static class EmailSetupRegistration
         // if (builder.Configuration.GetRequiredSection("ASPNETCORE_ENVIRONMENT").Value == "Production")
         //     builder.Services.AddSingleton<IEmailSender<ApplicationUser>, IdentityProductionEmailSender>();
         // else
-        builder.Services.AddSingleton<IEmailSender<ApplicationUser>, IdentityDevelopmentEmailSender>();
+        // builder.Services.AddSingleton<IEmailSender<ApplicationUser>, IdentityDevelopmentEmailSender>();
 
-        
-        // builder.Services.AddSingleton<IEmailSender<ApplicationUser>, IdentityProductionEmailSender>();
+        // TODO set up correctly in production
+        builder.Services.AddSingleton<IEmailSender<ApplicationUser>, IdentityProductionEmailSender>();
     }
 }

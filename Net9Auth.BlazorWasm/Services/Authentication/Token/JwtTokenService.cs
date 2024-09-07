@@ -114,7 +114,6 @@ public class JwtTokenService(ILocalStorageService localStorage, IConfiguration c
             ValidateIssuer = true,  
             ValidIssuer = configuration["Jwt:ValidIssuer"],
             ValidAudience = configuration["Jwt:ValidAudience"],
-            // IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("ByYM000OLlMQG6VVVp1OH7Xzyr7gHuw1qvUC5dcGt3SNM"))  // The same key as the one that generate the token
             IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["Jwt:SecurityKey"] ?? throw new InvalidOperationException()))  // The same key as the one that generate the token
         };
 }
