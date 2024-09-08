@@ -1,9 +1,6 @@
 @page "/Account/Manage/Profile"
 
 
-@* @using Microsoft.AspNetCore.Http *@
-
-@using Microsoft.AspNetCore.Http
 @using Net9Auth.BlazorWasm.Services.Authentication.Infra
 @using Net9Auth.BlazorWasm.Services.Authentication.Profile
 @using Net9Auth.Shared.Infrastructure.Extensions
@@ -42,7 +39,7 @@
 
     private string? Message { get; set; }
 
-    [CascadingParameter] private HttpContext HttpContext { get; set; } = default!;
+    // [CascadingParameter] private HttpContext HttpContext { get; set; } = default!;
 
     [SupplyParameterFromForm] private SetPhoneNumberInputModel Input { get; set; } = new();
 
