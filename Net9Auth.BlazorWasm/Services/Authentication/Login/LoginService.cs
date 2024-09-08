@@ -4,10 +4,11 @@ using System.Net.Http.Json;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Components.Authorization;
 using Net9Auth.BlazorWasm.Services.Authentication.Infra;
+using Net9Auth.BlazorWasm.Services.Authentication.Login.Models;
 using Net9Auth.BlazorWasm.Services.Authentication.Token;
 using Net9Auth.Shared.Models.Authentication.Login;
 using static System.String;
-using static Net9Auth.BlazorWasm.Services.Authentication.Login.AuthLoginMessage;
+using static Net9Auth.BlazorWasm.Services.Authentication.Login.Models.AuthLoginMessage;
 
 namespace Net9Auth.BlazorWasm.Services.Authentication.Login;
 

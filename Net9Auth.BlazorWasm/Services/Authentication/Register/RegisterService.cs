@@ -1,6 +1,7 @@
 using System.Net.Http.Json;
+using Net9Auth.BlazorWasm.Services.Authentication.Register.Models;
 using Net9Auth.Shared.Models.Authentication.Register;
-using static Net9Auth.BlazorWasm.Services.Authentication.Register.AuthRegisterInfo;
+using static Net9Auth.BlazorWasm.Services.Authentication.Register.Models.AuthRegisterInfo;
 
 namespace Net9Auth.BlazorWasm.Services.Authentication.Register;
 

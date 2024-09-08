@@ -1,0 +1,69 @@
+@using Microsoft.AspNetCore.Authorization
+@using Net9Auth.BlazorWasm.Services.Authentication.ChangeEmail
+@using Net9Auth.BlazorWasm.Services.Authentication.Infra
+
+@page "/Account/ConfirmEmailChange"
+@inject IIdentityAccessor IdentityAccessor
+@inject IChangeEmailService ChangeEmailService
+
+@attribute [AllowAnonymous]
+<PageTitle>Confirm email change</PageTitle>
+
+<h1>Confirm email change</h1>
+
+<StatusMessage Message="@_message" />
+
+@code {
+    private string? _message;
+
+    [SupplyParameterFromQuery]
+    private string? UserId { get; set; }
+
+    [SupplyParameterFromQuery]
+    private string? Email { get; set; }
+
+    [SupplyParameterFromQuery]
+    private string? NewEmail { get; set; }
+    
+    [SupplyParameterFromQuery]
+    private string? Code { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        if (UserId is null || Email is null || NewEmail is null || Code is null)
+        {
+            @* RedirectManager.RedirectToWithStatus( *@
+                @* "Account/Login", "Error: Invalid email change confirmation link.", HttpContext); *@
+        }
+
+        var result = await ChangeEmailService.ConfirmChangeEmailAsync(Email, NewEmail, Code);
+        if (result.Succeeded)
+        {
+            _message = "Thank you for confirming your email change.";    
+            return;
+        }
+        _message = "Error: Email not confirmed";    
+        
+
+
+
+        @* var result = await UserManager.ChangeEmailAsync(user, Email, code); *@
+        @* if (!result.Succeeded)
+        {
+            message = "Error changing email.";
+            return;
+        } *@
+
+        // In our UI email and user name are one and the same, so when we update the email
+        // we need to update the user name.
+        @* var setUserNameResult = await UserManager.SetUserNameAsync(user, Email);
+        if (!setUserNameResult.Succeeded)
+        {
+            message = "Error changing user name.";
+            return;
+        }
+
+        await SignInManager.RefreshSignInAsync(user); *@
+        
+    }
+}

@@ -40,4 +40,12 @@
     </Reference>
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Pages\Account\Profile\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <AdditionalFiles Include="Pages\Account\Manage\Profile\Profile.razor" />
+  </ItemGroup>
+
 </Project>

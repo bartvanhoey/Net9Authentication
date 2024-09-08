@@ -1,5 +1,6 @@
 ﻿using System.Net.Http.Json;
 using Net9Auth.BlazorWasm.Services.Authentication.Logout;
+using Net9Auth.BlazorWasm.Services.Authentication.Refresh.Models;
 using Net9Auth.BlazorWasm.Services.Authentication.Token;
 using Net9Auth.Shared.Models.Authentication.Refresh;
 using static System.String;

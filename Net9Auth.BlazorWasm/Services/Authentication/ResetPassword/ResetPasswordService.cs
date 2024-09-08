@@ -1,6 +1,7 @@
 ﻿using System.Net.Http.Json;
+using Net9Auth.BlazorWasm.Services.Authentication.ResetPassword.Models;
 using Net9Auth.Shared.Models.Authentication.ResetPassword;
-using static Net9Auth.BlazorWasm.Services.Authentication.ResetPassword.AuthResetPasswordInfo;
+using static Net9Auth.BlazorWasm.Services.Authentication.ResetPassword.Models.AuthResetPasswordInfo;
 
 namespace Net9Auth.BlazorWasm.Services.Authentication.ResetPassword;
 

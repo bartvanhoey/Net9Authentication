@@ -1,3 +1,4 @@
+using Net9Auth.BlazorWasm.Services.Authentication.Register.Models;
 using Net9Auth.Shared.Models.Authentication.Register;
 
 namespace Net9Auth.BlazorWasm.Services.Authentication.Register;

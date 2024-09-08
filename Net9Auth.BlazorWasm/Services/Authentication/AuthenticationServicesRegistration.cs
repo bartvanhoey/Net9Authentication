@@ -1,4 +1,6 @@
-﻿using Net9Auth.BlazorWasm.Services.Authentication.ConfirmEmail;
+﻿using Net9Auth.BlazorWasm.Services.Authentication.ChangeEmail;
+using Net9Auth.BlazorWasm.Services.Authentication.ChangePassword;
+using Net9Auth.BlazorWasm.Services.Authentication.ConfirmEmail;
 using Net9Auth.BlazorWasm.Services.Authentication.ForgotPassword;
 using Net9Auth.BlazorWasm.Services.Authentication.Infra;
 using Net9Auth.BlazorWasm.Services.Authentication.Login;
@@ -25,8 +27,8 @@ public static class AuthenticationServicesRegistration
         services.AddScoped<IForgotPasswordService, ForgotPasswordService>();
         services.AddScoped<IResetPasswordService, ResetPasswordService>();
         services.AddScoped<IProfileService, ProfileService>();
-        // services.AddScoped<IUserHasPasswordService, UserHasPasswordService>();
-        // services.AddScoped<IChangePasswordService, ChangePasswordService>();
-        // services.AddScoped<IChangeEmailService, ChangeEmailService>();
+        services.AddScoped<IUserHasPasswordService, UserHasPasswordService>();
+        services.AddScoped<IChangePasswordService, ChangePasswordService>();
+        services.AddScoped<IChangeEmailService, ChangeEmailService>();
     }
 }

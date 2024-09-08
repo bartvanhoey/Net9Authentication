@@ -1,4 +1,5 @@
-﻿using Net9Auth.Shared.Models.Authentication.ResetPassword;
+﻿using Net9Auth.BlazorWasm.Services.Authentication.ResetPassword.Models;
+using Net9Auth.Shared.Models.Authentication.ResetPassword;
 
 namespace Net9Auth.BlazorWasm.Services.Authentication.ResetPassword;
 

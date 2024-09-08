@@ -32,6 +32,7 @@ public class LoginController(UserManager<ApplicationUser> userManager, IHostEnvi
             if (validationResult.IsFailure) return Nok500<LoginResponse>(logger, validationResult.Error?.Message);
                 
             var user = await userManager.FindByEmailAsync(model?.Email ?? string.Empty);
+
             if (user == null) return Nok500CouldNotFindUser<LoginResponse>(logger);
             
             if (IsNullOrWhiteSpace(user.Email)) return Nok500EmailIsNull<LoginResponse>(logger);

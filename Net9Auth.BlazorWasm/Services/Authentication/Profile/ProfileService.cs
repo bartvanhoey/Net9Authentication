@@ -1,8 +1,8 @@
 ﻿using System.Net.Http.Json;
+using Net9Auth.BlazorWasm.Services.Authentication.Profile.Models;
 using Net9Auth.BlazorWasm.Services.Logging;
-using Net9Auth.Shared.Models.Authentication.Profile;
 using Net9Auth.Shared.Models.Authentication.SetPhoneNumber;
-using static Net9Auth.BlazorWasm.Services.Authentication.Profile.AuthSetPhoneNumberInfo;
+using static Net9Auth.BlazorWasm.Services.Authentication.Profile.Models.AuthSetPhoneNumberInfo;
 
 namespace Net9Auth.BlazorWasm.Services.Authentication.Profile;
 
