@@ -1,4 +1,6 @@
-# Net9 JwtAuthentication
+[![.NET](https://github.com/bartvanhoey/Net9Authentication/actions/workflows/dotnet.yml/badge.svg)](https://github.com/bartvanhoey/Net9Authentication/actions/workflows/dotnet.yml)
+
+# Net9.0 JwtAuthentication
 
 ## CURL
 
