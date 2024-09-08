@@ -5,14 +5,14 @@ using System.Text;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
-using Net9Auth.API.Infrastructure.Extensions;
-using Net9Auth.API.Infrastructure.Functional;
-using Net9Auth.API.Infrastructure.Functional.Errors;
 using Net9Auth.API.Models;
 using Net9Auth.API.Models.Authentication.Responses;
+using Net9Auth.Shared.Infrastructure.Extensions;
+using Net9Auth.Shared.Infrastructure.Functional;
+using Net9Auth.Shared.Infrastructure.Functional.Errors;
 using Net9Auth.Shared.Models.Authentication;
 using static Microsoft.AspNetCore.Http.StatusCodes;
-using static Net9Auth.API.Infrastructure.Functional.Result;
+using static Net9Auth.Shared.Infrastructure.Functional.Result;
 
 
 namespace Net9Auth.API.Controllers.Authentication.Base;

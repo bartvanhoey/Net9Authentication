@@ -1,4 +1,4 @@
-namespace Net9Auth.API.Infrastructure.Functional.Errors;
+namespace Net9Auth.Shared.Infrastructure.Functional.Errors;
 
 public class AnotherCustomErrorMessageResultError : BaseResultError
 {

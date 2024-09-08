@@ -1,4 +1,4 @@
-namespace Net9Auth.API;
+namespace Net9Auth.Shared.Models.Weather;
 
 public class WeatherForecast
 {

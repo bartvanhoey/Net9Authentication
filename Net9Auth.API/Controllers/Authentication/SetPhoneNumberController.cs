@@ -2,9 +2,9 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Net9Auth.API.Controllers.Authentication.Base;
-using Net9Auth.API.Infrastructure.Extensions;
 using Net9Auth.API.Models;
 using Net9Auth.API.Models.Authentication.Responses.SetPhoneNumber;
+using Net9Auth.Shared.Infrastructure.Extensions;
 using Net9Auth.Shared.Models.Authentication.SetPhoneNumber;
 using static Microsoft.AspNetCore.Http.StatusCodes;
 

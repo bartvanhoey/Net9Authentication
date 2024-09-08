@@ -6,6 +6,8 @@ using Net9Auth.BlazorWasm;
 using Microsoft.Extensions.DependencyInjection;
 using Net9Auth.BlazorWasm.Services;
 using Net9Auth.BlazorWasm.Services.Authentication;
+using Net9Auth.BlazorWasm.Services.Authentication.Infra;
+using Net9Auth.BlazorWasm.Services.Logging;
 
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
 builder.RootComponents.Add<App>("#app");
@@ -20,8 +22,6 @@ builder.Services.AddScoped<AuthenticationStateProvider, CustomAuthenticationStat
 
 builder.Services.AddBlazoredLocalStorage();
 
-
-
 builder.Services.AddAuthorizationCore();
 
 var serverBaseAddress = builder.Configuration["ServerUrl"] ?? "";
@@ -33,7 +33,7 @@ builder.Services.AddHttpClient("ServerAPI",
         })
     .AddHttpMessageHandler<CustomAuthenticationHandler>();
 
-// builder.Services.AddScoped<ISerilogService, SerilogService>();
+builder.Services.AddScoped<ISerilogService, SerilogService>();
 builder.Services.RegisterAuthenticationServices();
 
 

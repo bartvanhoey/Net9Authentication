@@ -3,7 +3,7 @@ using System.Text.Json;
 using System.Text.RegularExpressions;
 using JetBrains.Annotations;
 
-namespace Net9Auth.API.Infrastructure.Extensions;
+namespace Net9Auth.Shared.Infrastructure.Extensions;
 
 public static class StringExtensions
 {

@@ -3,9 +3,9 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.WebUtilities;
 using Net9Auth.API.Controllers.Authentication.Base;
-using Net9Auth.API.Infrastructure.Extensions;
 using Net9Auth.API.Models;
 using Net9Auth.API.Models.Authentication.Responses.ResendEmailConfirmation;
+using Net9Auth.Shared.Infrastructure.Extensions;
 using Net9Auth.Shared.Models.Authentication.ResendEmailConfirmation;
 using static Microsoft.AspNetCore.Http.StatusCodes;
 

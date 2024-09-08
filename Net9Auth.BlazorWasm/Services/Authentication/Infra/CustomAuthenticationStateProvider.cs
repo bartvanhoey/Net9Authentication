@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Components.Authorization;
 using Net9Auth.BlazorWasm.Services.Authentication.Refresh;
 using Net9Auth.BlazorWasm.Services.Authentication.Token;
 
-namespace Net9Auth.BlazorWasm.Services.Authentication;
+namespace Net9Auth.BlazorWasm.Services.Authentication.Infra;
 
 public class CustomAuthenticationStateProvider(IHttpClientFactory clientFactory, IJwtTokenService jwtTokenService)
     : AuthenticationStateProvider

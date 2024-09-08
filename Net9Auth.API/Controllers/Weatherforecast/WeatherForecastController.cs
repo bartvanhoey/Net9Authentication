@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using Net9Auth.Shared.Models.Weather;
 
 namespace Net9Auth.API.Controllers.Weatherforecast;
 

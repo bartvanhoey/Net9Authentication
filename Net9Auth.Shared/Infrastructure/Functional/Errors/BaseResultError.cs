@@ -1,6 +1,6 @@
-using Net9Auth.API.Infrastructure.Extensions;
+using Net9Auth.Shared.Infrastructure.Extensions;
 
-namespace Net9Auth.API.Infrastructure.Functional.Errors;
+namespace Net9Auth.Shared.Infrastructure.Functional.Errors;
 
 public abstract class BaseResultError
 {

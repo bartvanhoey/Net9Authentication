@@ -5,7 +5,7 @@ using Net9Auth.BlazorWasm.Services.Authentication.Token;
 using static System.Console;
 using static System.String;
 
-namespace Net9Auth.BlazorWasm.Services.Authentication;
+namespace Net9Auth.BlazorWasm.Services.Authentication.Infra;
 
 public class CustomAuthenticationHandler(
     IConfiguration configuration,

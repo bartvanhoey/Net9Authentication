@@ -1,6 +1,6 @@
-﻿using Net9Auth.API.Infrastructure.Functional.Errors;
+﻿using Net9Auth.Shared.Infrastructure.Functional.Errors;
 
-namespace Net9Auth.API.Infrastructure.Functional;
+namespace Net9Auth.Shared.Infrastructure.Functional;
 // Copyright (c) 2015 Vladimir Khorikov
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy of

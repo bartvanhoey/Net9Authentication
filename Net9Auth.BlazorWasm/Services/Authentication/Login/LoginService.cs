@@ -3,6 +3,7 @@ using System.Net.Http.Headers;
 using System.Net.Http.Json;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Components.Authorization;
+using Net9Auth.BlazorWasm.Services.Authentication.Infra;
 using Net9Auth.BlazorWasm.Services.Authentication.Token;
 using Net9Auth.Shared.Models.Authentication.Login;
 using static System.String;
