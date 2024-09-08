@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Net9Auth.BlazorWasm", "Net9
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Net9Auth.Shared", "Net9Auth.Shared\Net9Auth.Shared.csproj", "{08ABCA17-2732-4005-9DA0-80889C24F024}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Net9Auth.Maui", "Net9Auth.Maui\Net9Auth.Maui.csproj", "{58F49DDF-738D-413A-971C-428638E8D56F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{08ABCA17-2732-4005-9DA0-80889C24F024}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{08ABCA17-2732-4005-9DA0-80889C24F024}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{08ABCA17-2732-4005-9DA0-80889C24F024}.Release|Any CPU.Build.0 = Release|Any CPU
+		{58F49DDF-738D-413A-971C-428638E8D56F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{58F49DDF-738D-413A-971C-428638E8D56F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{58F49DDF-738D-413A-971C-428638E8D56F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{58F49DDF-738D-413A-971C-428638E8D56F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
