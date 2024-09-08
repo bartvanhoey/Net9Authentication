@@ -2,7 +2,7 @@
 @inject IdentityRedirectManager RedirectManager
 
 
-@using Microsoft.AspNetCore.Http
+
 @using Net9Auth.BlazorWasm.Services.Authentication.Login
 @using Net9Auth.BlazorWasm.Services.Authentication.Login.Models
 @using Net9Auth.Shared.Models.Authentication.Login
@@ -71,7 +71,7 @@
 @code {
     private string? _errorMessage;
 
-    [CascadingParameter] private HttpContext HttpContext { get; set; } = default!;
+    // [CascadingParameter] private HttpContext HttpContext { get; set; } = default!;
 
     [SupplyParameterFromForm] private LoginInputModel Input { get; set; } = new();
 

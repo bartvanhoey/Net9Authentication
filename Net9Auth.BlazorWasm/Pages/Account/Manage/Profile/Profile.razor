@@ -1,4 +1,8 @@
 @page "/Account/Manage/Profile"
+
+
+@* @using Microsoft.AspNetCore.Http *@
+
 @using Microsoft.AspNetCore.Http
 @using Net9Auth.BlazorWasm.Services.Authentication.Infra
 @using Net9Auth.BlazorWasm.Services.Authentication.Profile
@@ -46,7 +50,7 @@
     {
         _userName  = await IdentityAccessor.GetUserNameAsync();
 
-        if (_userName != null || _userName.IsNullOrWhiteSpace()) return;
+        if (_userName == null || _userName.IsNullOrWhiteSpace()) return;
 
         var profile = await ProfileService.GetProfileAsync();
         Input.PhoneNumber = profile?.PhoneNumber;
