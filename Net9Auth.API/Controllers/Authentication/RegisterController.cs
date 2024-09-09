@@ -46,6 +46,9 @@ public class RegisterController(UserManager<ApplicationUser> userManager, IHostE
 
             var createUserResult = await userManager.CreateAsync(newUser, model.Password);
             if (!createUserResult.Succeeded) return Nok500<RegisterResponse>(logger, createUserResult.Errors);
+            
+            await newUser.AddToUserRoleAsync(UserManager, RoleManager);
+            await newUser.AddToAdminRoleIfAdministratorAsync(UserManager, RoleManager, Configuration);
 
             var userId = await userManager.GetUserIdAsync(newUser);
             var code = await userManager.GenerateEmailConfirmationTokenAsync(newUser);
