@@ -1,13 +1,8 @@
-using Net9Auth.Shared.Models.Authentication;
-
 namespace Net9Auth.API.Models.Authentication.Responses.ChangeEmail;
 
 public class ChangeEmailResponse :IControllerResponse
 {
-    public ChangeEmailResponse()
-    {
-        
-    }
+    public ChangeEmailResponse(string message) => Message = message;
 
     public ChangeEmailResponse(string status, string message)
     {

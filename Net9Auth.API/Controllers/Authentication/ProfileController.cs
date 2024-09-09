@@ -10,11 +10,11 @@ namespace Net9Auth.API.Controllers.Authentication;
 
 [Route("api/account")]
 [ApiController]
-public class ProfileController(UserManager<ApplicationUser> userManager, IHostEnvironment environment,
+public class ProfileController(UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager, IHostEnvironment environment,
     ILogger<ProfileController> logger,
     IConfiguration configuration)
 #pragma warning disable CS9107 // Parameter is captured into the state of the enclosing type and its value is also passed to the base constructor. The value might be captured by the base class as well.
-    : AuthControllerBase(userManager, configuration, environment)
+    : AuthControllerBase(userManager, roleManager, configuration, environment)
 #pragma warning restore CS9107 // Parameter is captured into the state of the enclosing type and its value is also passed to the base constructor. The value might be captured by the base class as well.
 {
     [Authorize]
@@ -28,10 +28,10 @@ public class ProfileController(UserManager<ApplicationUser> userManager, IHostEn
             if (result.IsFailure) return Nok500<ProfileResponse>(logger, result.Error?.Message);
 
             var email = HttpContext.User.Identity?.Name;
-            if (email.IsNullOrWhiteSpace()) return Nok500EmailIsNull<ProfileResponse>(logger);
+            if (email.IsNullOrWhiteSpace()) return Nok400Email<ProfileResponse>(logger);
 
             var user = await userManager.FindByEmailAsync(email ?? throw new InvalidOperationException());
-            if (user == null) return Nok500CouldNotFindUser<ProfileResponse>(logger);
+            if (user == null) return Nok404CouldNotFindUser<ProfileResponse>(logger);
 
             var userName = await userManager.GetUserNameAsync(user);
             var phoneNumber = await userManager.GetPhoneNumberAsync(user);

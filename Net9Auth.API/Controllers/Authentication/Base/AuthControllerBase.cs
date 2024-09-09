@@ -1,154 +1,58 @@
-﻿using System.IdentityModel.Tokens.Jwt;
-using System.Runtime.CompilerServices;
-using System.Security.Claims;
-using System.Text;
+﻿using System.Runtime.CompilerServices;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.IdentityModel.Tokens;
 using Net9Auth.API.Models;
 using Net9Auth.API.Models.Authentication.Responses;
 using Net9Auth.Shared.Infrastructure.Extensions;
 using Net9Auth.Shared.Infrastructure.Functional;
 using Net9Auth.Shared.Infrastructure.Functional.Errors;
 using Net9Auth.Shared.Models.Authentication;
-using static Microsoft.AspNetCore.Http.StatusCodes;
 using static Net9Auth.Shared.Infrastructure.Functional.Result;
-
 
 namespace Net9Auth.API.Controllers.Authentication.Base;
 
-public class AuthControllerBase(
-    UserManager<ApplicationUser> userManager,
-    IConfiguration configuration,
-    IHostEnvironment environment) : ControllerBase
+public class AuthControllerBase : CustomControllerBase
 {
-    protected async Task<JwtSecurityToken> GenerateJwtToken(ApplicationUser user, string jwtValidIssuer,
-        string jwtValidAudience, string jwtSecurityKey)
+    private readonly IHostEnvironment _env;
+    protected readonly IConfiguration Configuration;
+    protected readonly RoleManager<IdentityRole> RoleManager;
+    protected readonly UserManager<ApplicationUser> UserManager;
+
+    public AuthControllerBase(UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager,
+        IConfiguration configuration,
+        IHostEnvironment env) : base(env)
     {
-        var authClaims = new List<Claim>
-        {
-            new(ClaimTypes.Name, user.Email ?? throw new InvalidOperationException()),
-            new(ClaimTypes.NameIdentifier, user.Id),
-            new(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-        };
-
-        var userRoles = await userManager.GetRolesAsync(user);
-        if (userRoles is { Count: > 0 })
-        {
-            authClaims.AddRange(userRoles.Select(userRole => new Claim(ClaimTypes.Role, userRole)));
-        }
-
-        var expirationInSeconds = double.TryParse(configuration["Jwt:ExpirationInSeconds"], out var jwtExpirationInSeconds) ? jwtExpirationInSeconds : 60;
-        var token = new JwtSecurityToken(
-            issuer: jwtValidIssuer,
-            audience: jwtValidAudience,
-            expires: DateTime.UtcNow.AddSeconds(expirationInSeconds),
-            claims: authClaims,
-            signingCredentials: new SigningCredentials(new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSecurityKey)),
-                SecurityAlgorithms.HmacSha256)
-        );
-        return token;
+        UserManager = userManager;
+        RoleManager = roleManager;
+        Configuration = configuration;
+        _env = env;
     }
 
-    protected IActionResult Nok500<T>(ILogger logger, string? errorMessage = "something went wrong",
-        [CallerMemberName] string memberName = "") where T : IControllerResponse
-    {
-        logger.LogError("{MemberName} : {ErrorMessage}", memberName, errorMessage);
-        if (Activator.CreateInstance(typeof(T)) is not IControllerResponse response)
-            return StatusCode(Status500InternalServerError);
+    
 
-        response.Status = "Error";
-        response.Message = errorMessage;
-        return environment.IsDevelopment()
-            ? StatusCode(Status500InternalServerError, response)
-            : StatusCode(Status500InternalServerError);
-    }
-
-    protected IActionResult Nok500EmailIsNull<T>(ILogger logger, [CallerMemberName] string memberName = "")
-        where T : IControllerResponse
-        => Nok500<T>(logger, "Email is null", memberName);
-
-    protected IActionResult Nok500CodeIsNull<T>(ILogger logger, [CallerMemberName] string memberName = "")
-        where T : IControllerResponse
-        => Nok500<T>(logger, "Code is null", memberName);
-
-    protected IActionResult Nok500CouldNotFindUser<T>(ILogger logger, [CallerMemberName] string memberName = "")
-        where T : IControllerResponse
-        => Nok500<T>(logger, "Could not find user", memberName);
-
-    protected IActionResult Nok500<T>(ILogger logger, Exception exception, string? errorMessage = null,
-        [CallerMemberName] string memberName = "") where T : IControllerResponse
-    {
-        // ReSharper disable once TemplateIsNotCompileTimeConstantProblem
-        logger.LogError(exception, memberName);
-        if (Activator.CreateInstance(typeof(T)) is not IControllerResponse response)
-            return StatusCode(Status500InternalServerError);
-
-        response.Status = "Error";
-        response.Message = errorMessage.IsNullOrWhiteSpace() ? "Something went wrong" : errorMessage;
-
-        return environment.IsDevelopment()
-            ? StatusCode(Status500InternalServerError, response)
-            : StatusCode(Status500InternalServerError);
-    }
-
-    protected IActionResult Ok200<T>(string? message = null)
-    {
-        var controllerResponse = Activator.CreateInstance(typeof(T)) as IControllerResponse;
-        if (controllerResponse == null) return Ok();
-        controllerResponse.Status = "Success";
-        controllerResponse.Message = message.IsNullOrWhiteSpace() ? "success" : message;
-        return Ok(controllerResponse);
-    }
-
-    protected IActionResult Nok500<T>(ILogger logger, IEnumerable<IdentityError>? errors,
-        [CallerMemberName] string memberName = "") where T : IControllerResponse
-    {
-        if (errors == null)
-        {
-            logger.LogError("{MemberName}: Errors is null", memberName);
-            return StatusCode(Status500InternalServerError);
-        }
-
-        if (Activator.CreateInstance(typeof(T)) is not IControllerResponse response)
-        {
-            logger.LogError("{MemberName}", memberName);
-            return StatusCode(Status500InternalServerError);
-        }
-
-        response.Status = "Error";
-        response.Errors = errors.Select(x => new ControllerResponseError(x.Code, x.Description));
-        foreach (var error in response.Errors)
-            logger.LogError("{MemberName} : {ErrorCode} - {ErrorDescription}", memberName, error.Code,
-                error.Description);
-
-        return environment.IsDevelopment()
-            ? StatusCode(Status500InternalServerError, response)
-            : StatusCode(Status500InternalServerError);
-    }
-
+    
 
     protected Result<ValidateControllerResult> ValidateControllerInputModel<T>(BaseInputModel? input, ILogger<T> logger,
         string methodName)
     {
         if (input is not null) return ValidateController(logger, methodName);
-        logger.LogError("{MethodName}: input is null", methodName);
+        logger.LogError($"{methodName}: input is null");
         return Fail<ValidateControllerResult>(new ResultError("input is null"));
     }
 
     protected Result<ValidateControllerResult> ValidateController<T>(ILogger<T> logger, string methodName)
     {
-        var securityKey = configuration["Jwt:SecurityKey"];
+        var securityKey = Configuration["Jwt:SecurityKey"];
         if (IsNullOrEmpty(securityKey))
         {
-            logger.LogError("{MethodName}: security key is null", methodName);
+            logger.LogError($"{methodName}: security key is null");
             return Fail<ValidateControllerResult>(new ResultError("security key is null"));
         }
 
-        var validIssuer = configuration["Jwt:ValidIssuer"];
+        var validIssuer = Configuration["Jwt:ValidIssuer"];
         if (IsNullOrEmpty(validIssuer))
         {
-            logger.LogError("{MethodName}: valid issuer is null", methodName);
+            logger.LogError($"{methodName}: valid issuer is null");
             return Fail<ValidateControllerResult>(new ResultError("valid issuer is null"));
         }
 
@@ -161,31 +65,22 @@ public class AuthControllerBase(
 
     protected Result<ValidateOriginResult> ValidateOrigin<T>(ILogger<T> logger, string methodName)
     {
-        var validAudiences = configuration.GetSection("Jwt:ValidAudiences").Get<List<string>>();
+        var validAudiences = Configuration.GetSection("Jwt:ValidAudiences").Get<List<string>>();
+
         if (validAudiences == null || validAudiences.Count == 0)
         {
-            logger.LogError("{MethodName}: audience is null", methodName);
+            logger.LogError($"{methodName}: audience is null");
             return Fail<ValidateOriginResult>(new ResultError("audience is null"));
         }
 
-        var validIssuer = configuration["Jwt:ValidIssuer"];
-        
-        
-        var host = HttpContext.Request.Headers.Host.ToString();
-        if (host.IsNullOrWhiteSpace()) return Fail<ValidateOriginResult>(new ResultError("host is null or white space"));
-        
-        if (validIssuer != null && validIssuer.Contains(host) && HttpContext.Request.Headers.Count <=4 )
-        {
-            var blazorServerLocalhostAddress = configuration["Jwt:BlazorServerLocalhostAddress"];
-            return Result.Ok(new ValidateOriginResult(blazorServerLocalhostAddress ?? throw new InvalidOperationException()));
-        }
-
         var origin = HttpContext.Request.Headers.Origin.FirstOrDefault();
-        
         if (origin.IsNotNullOrWhiteSpace() && validAudiences.Contains(origin ?? throw new InvalidOperationException()))
-            return Result.Ok(new ValidateOriginResult(origin: origin));
+            return Result.Ok(new ValidateOriginResult(origin));
 
-        logger.LogError("{MethodName}: origin is wrong", methodName);
+        logger.LogError($"{methodName}: origin is wrong: {origin}");
         return Fail<ValidateOriginResult>(new ResultError("origin is wrong"));
     }
+    
+    protected IActionResult Nok500CodeIsNull<T>(ILogger logger, [CallerMemberName] string memberName = "")
+        where T : IControllerResponse  => Nok500<T>(logger, $"{memberName}-Code is null");
 }

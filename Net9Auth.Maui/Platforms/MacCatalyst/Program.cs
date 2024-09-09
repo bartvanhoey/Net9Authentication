@@ -1,7 +1,4 @@
-﻿using ObjCRuntime;
-using UIKit;
-
-namespace Net9Auth.Maui;
+﻿namespace Net9Auth.Maui.Platforms.MacCatalyst;
 
 public class Program
 {

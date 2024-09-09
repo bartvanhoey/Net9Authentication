@@ -11,9 +11,9 @@ namespace Net9Auth.API.Controllers.Authentication;
 
 [ApiController]
 [Route("api/account")]
-public class ConfirmEmailController(UserManager<ApplicationUser> userManager, IHostEnvironment environment, ILogger<ConfirmEmailController> logger, IConfiguration configuration)   
+public class ConfirmEmailController(UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager, IHostEnvironment environment, ILogger<ConfirmEmailController> logger, IConfiguration configuration)   
 #pragma warning disable CS9107 // Parameter is captured into the state of the enclosing type and its value is also passed to the base constructor. The value might be captured by the base class as well.
-    : AuthControllerBase(userManager, configuration, environment)
+    : AuthControllerBase(userManager, roleManager, configuration, environment)
 #pragma warning restore CS9107 // Parameter is captured into the state of the enclosing type and its value is also passed to the base constructor. The value might be captured by the base class as well.
 {
     [HttpPost]
@@ -26,7 +26,7 @@ public class ConfirmEmailController(UserManager<ApplicationUser> userManager, IH
             if (validationResult.IsFailure) return Nok500<ConfirmEmailResponse>(logger, validationResult.Error?.Message);
             
             var user = await userManager.FindByIdAsync(model.UserId);
-            if (user == null) return Nok500CouldNotFindUser<ConfirmEmailResponse>(logger);
+            if (user == null) return Nok404CouldNotFindUser<ConfirmEmailResponse>(logger);
 
             var code = UTF8.GetString(Base64UrlDecode(model.Code));
             var result = await userManager.ConfirmEmailAsync(user, code);

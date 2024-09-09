@@ -17,7 +17,7 @@ namespace Net9Auth.API.Controllers.Authentication;
 public class RegisterController(UserManager<ApplicationUser> userManager, IHostEnvironment environment, IEmailSender<ApplicationUser> emailSender, IConfiguration configuration, ILogger<RegisterController> logger, 
     RoleManager<IdentityRole> roleManager)
 #pragma warning disable CS9107 // Parameter is captured into the state of the enclosing type and its value is also passed to the base constructor. The value might be captured by the base class as well.
-    : AuthControllerBase(userManager, configuration, environment)
+    : AuthControllerBase(userManager, roleManager, configuration, environment)
 #pragma warning restore CS9107 // Parameter is captured into the state of the enclosing type and its value is also passed to the base constructor. The value might be captured by the base class as well.
 {
     [HttpPost]
@@ -60,7 +60,7 @@ public class RegisterController(UserManager<ApplicationUser> userManager, IHostE
         }
         catch (Exception exception)
         {
-            return Nok500<RegisterResponse>(logger, exception);
+            return Nok500Exception<RegisterResponse>(logger, exception);
         }
     }
 

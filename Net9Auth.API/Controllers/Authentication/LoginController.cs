@@ -14,10 +14,10 @@ namespace Net9Auth.API.Controllers.Authentication;
 
 [Route("api/account")]
 [ApiController]
-public class LoginController(UserManager<ApplicationUser> userManager, IHostEnvironment environment, 
+public class LoginController(UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager, IHostEnvironment environment, 
     IConfiguration configuration, ILogger<LoginController> logger)
 #pragma warning disable CS9107 // Parameter is captured into the state of the enclosing type and its value is also passed to the base constructor. The value might be captured by the base class as well.
-    : AuthControllerBase(userManager, configuration, environment)
+    : AuthControllerBase(userManager, roleManager, configuration, environment)
 #pragma warning restore CS9107 // Parameter is captured into the state of the enclosing type and its value is also passed to the base constructor. The value might be captured by the base class as well.
 {
     [HttpPost]
@@ -33,9 +33,9 @@ public class LoginController(UserManager<ApplicationUser> userManager, IHostEnvi
                 
             var user = await userManager.FindByEmailAsync(model?.Email ?? string.Empty);
 
-            if (user == null) return Nok500CouldNotFindUser<LoginResponse>(logger);
+            if (user == null) return Nok404CouldNotFindUser<LoginResponse>(logger);
             
-            if (IsNullOrWhiteSpace(user.Email)) return Nok500EmailIsNull<LoginResponse>(logger);
+            if (IsNullOrWhiteSpace(user.Email)) return Nok400Email<LoginResponse>(logger);
             
             var isPasswordValid = await userManager.CheckPasswordAsync(user, model?.Password ?? throw new InvalidOperationException());
             if (!isPasswordValid) return Nok500<LoginResponse>(logger, "Invalid password");
@@ -46,13 +46,14 @@ public class LoginController(UserManager<ApplicationUser> userManager, IHostEnvi
 
             await userManager.UpdateAsync(user);
 
-            var jwtSecurityToken = await GenerateJwtToken(user, validationResult.Value.ValidIssuer, validationResult.Value.Origin, validationResult.Value.SecurityKey);
+            var jwtSecurityToken = await user.GenerateJwtToken(UserManager, Configuration,
+                validationResult.Value.ValidIssuer, validationResult.Value.Origin, validationResult.Value.SecurityKey);
             var accessToken = new JwtSecurityTokenHandler().WriteToken(jwtSecurityToken);
             return Ok(new LoginResponse(accessToken, refreshToken, jwtSecurityToken.ValidTo));
         }
         catch (Exception exception)
         {
-            return Nok500<LoginResponse>(logger, exception);
+            return Nok500Exception<LoginResponse>(logger, exception);
         }
     }
 

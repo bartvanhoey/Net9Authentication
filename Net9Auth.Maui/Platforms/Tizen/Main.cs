@@ -1,8 +1,4 @@
-using System;
-using Microsoft.Maui;
-using Microsoft.Maui.Hosting;
-
-namespace Net9Auth.Maui;
+namespace Net9Auth.Maui.Platforms.Tizen;
 
 class Program : MauiApplication
 {

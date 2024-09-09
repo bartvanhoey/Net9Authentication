@@ -1,7 +1,4 @@
-﻿using Android.App;
-using Android.Runtime;
-
-namespace Net9Auth.Maui;
+﻿namespace Net9Auth.Maui.Platforms.Android;
 
 [Application]
 public class MainApplication : MauiApplication

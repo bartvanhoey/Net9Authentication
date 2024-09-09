@@ -11,7 +11,8 @@ namespace Net9Auth.API.Controllers.Authentication;
 
 [Route("api/account")]
 #pragma warning disable CS9107 // Parameter is captured into the state of the enclosing type and its value is also passed to the base constructor. The value might be captured by the base class as well.
-public class ChangePasswordController(UserManager<ApplicationUser> userManager, IHostEnvironment environment, IConfiguration configuration, ILogger<ChangePasswordController> logger) : AuthControllerBase(userManager, configuration, environment)
+public class ChangePasswordController(UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager, IHostEnvironment environment, IConfiguration configuration, ILogger<ChangePasswordController> logger) 
+    : AuthControllerBase(userManager, roleManager, configuration, environment)
 #pragma warning restore CS9107 // Parameter is captured into the state of the enclosing type and its value is also passed to the base constructor. The value might be captured by the base class as well.
 {
     [HttpPost]
@@ -28,10 +29,10 @@ public class ChangePasswordController(UserManager<ApplicationUser> userManager, 
                 return Nok500<ChangePasswordResponse>(logger, "Old or New password is null or empty");
 
             var email = HttpContext.User.Identity?.Name;
-            if (email.IsNullOrWhiteSpace()) return Nok500EmailIsNull<ChangePasswordResponse>(logger);
+            if (email.IsNullOrWhiteSpace()) return Nok400Email<ChangePasswordResponse>(logger);
 
             var user = email == null ? null : await userManager.FindByEmailAsync(email);
-            if (user == null) return Nok500CouldNotFindUser<ChangePasswordResponse>(logger);
+            if (user == null) return Nok404CouldNotFindUser<ChangePasswordResponse>(logger);
 
             var changePasswordResult = await userManager.ChangePasswordAsync(user, model.CurrentPassword, model.NewPassword);
             return changePasswordResult.Succeeded 
@@ -41,7 +42,7 @@ public class ChangePasswordController(UserManager<ApplicationUser> userManager, 
         catch (Exception exception)
         {
             logger.LogError(exception, nameof(ChangePassword));
-            return Nok500<ChangePasswordResponse>(logger, exception, "Change password went wrong"); 
+            return Nok500Exception<ChangePasswordResponse>(logger, exception); 
         }
     }
 }

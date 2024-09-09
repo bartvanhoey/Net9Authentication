@@ -1,8 +1,4 @@
-﻿using Android.App;
-using Android.Content.PM;
-using Android.OS;
-
-namespace Net9Auth.Maui;
+﻿namespace Net9Auth.Maui.Platforms.Android;
 
 [Activity(Theme = "@style/Maui.SplashTheme", MainLauncher = true, LaunchMode = LaunchMode.SingleTop,
     ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation | ConfigChanges.UiMode |

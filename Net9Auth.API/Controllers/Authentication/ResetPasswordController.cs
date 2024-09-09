@@ -13,7 +13,7 @@ namespace Net9Auth.API.Controllers.Authentication;
 [ApiController]
 [Route("api/account")]
 #pragma warning disable CS9107 // Parameter is captured into the state of the enclosing type and its value is also passed to the base constructor. The value might be captured by the base class as well.
-public class ResetPasswordController(UserManager<ApplicationUser> userManager, IHostEnvironment environment, ILogger<ResetPasswordController> logger, IConfiguration configuration) : AuthControllerBase(userManager, configuration, environment)
+public class ResetPasswordController(UserManager<ApplicationUser> userManager,  RoleManager<IdentityRole> roleManager, IHostEnvironment environment, ILogger<ResetPasswordController> logger, IConfiguration configuration) : AuthControllerBase(userManager, roleManager, configuration, environment)
 #pragma warning restore CS9107 // Parameter is captured into the state of the enclosing type and its value is also passed to the base constructor. The value might be captured by the base class as well.
 {
     [HttpPost]

@@ -16,11 +16,12 @@ namespace Net9Auth.API.Controllers.Authentication;
 [ApiController]
 public class RefreshController(
     UserManager<ApplicationUser> userManager,
+    RoleManager<IdentityRole> roleManager,
     IHostEnvironment environment,
     IConfiguration configuration,
     ILogger<RefreshController> logger)
 #pragma warning disable CS9107 // Parameter is captured into the state of the enclosing type and its value is also passed to the base constructor. The value might be captured by the base class as well.
-    : AuthControllerBase(userManager, configuration, environment)
+    : AuthControllerBase(userManager, roleManager, configuration, environment)
 #pragma warning restore CS9107 // Parameter is captured into the state of the enclosing type and its value is also passed to the base constructor. The value might be captured by the base class as well.
 {
     [HttpPost("Refresh")]
@@ -42,20 +43,20 @@ public class RefreshController(
             if (principal?.Identity?.Name is null) return Nok500<RefreshResponse>(logger, "Principal null");
 
             var user = await userManager.FindByNameAsync(principal.Identity.Name);
-            if (user == null) return Nok500CouldNotFindUser<RefreshResponse>(logger);
+            if (user == null) return Nok404CouldNotFindUser<RefreshResponse>(logger);
 
             if (user.RefreshToken != model.RefreshToken || user.RefreshTokenExpiry < DateTime.UtcNow)
                 return Nok500<RefreshResponse>(logger, "Something wrong with Refresh token");
 
-            var jwtSecurityToken = await GenerateJwtToken(user, validationResult.Value.ValidIssuer,
-                validationResult.Value.Origin, validationResult.Value.SecurityKey);
+            var jwtSecurityToken = await user.GenerateJwtToken(UserManager, Configuration,
+                validationResult.Value.ValidIssuer, validationResult.Value.Origin, validationResult.Value.SecurityKey);
            
             return Ok(new RefreshResponse(new JwtSecurityTokenHandler().WriteToken(jwtSecurityToken),
                 model.RefreshToken, jwtSecurityToken.ValidTo));
         }
         catch (Exception exception)
         {
-            return Nok500<RefreshResponse>(logger, exception);
+            return Nok500Exception<RefreshResponse>(logger, exception);
         }
     }
 

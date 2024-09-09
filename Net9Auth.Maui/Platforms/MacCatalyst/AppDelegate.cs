@@ -1,6 +1,4 @@
-﻿using Foundation;
-
-namespace Net9Auth.Maui;
+﻿namespace Net9Auth.Maui.Platforms.MacCatalyst;
 
 [Register("AppDelegate")]
 public class AppDelegate : MauiUIApplicationDelegate

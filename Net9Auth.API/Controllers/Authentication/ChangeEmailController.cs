@@ -14,9 +14,9 @@ namespace Net9Auth.API.Controllers.Authentication;
 
 [ApiController]
 [Route("api/account")]
-public class ChangeEmailController(UserManager<ApplicationUser> userManager, IHostEnvironment environment, IEmailSender<ApplicationUser> emailSender,
+public class ChangeEmailController(UserManager<ApplicationUser> userManager,RoleManager<IdentityRole> roleManager, IHostEnvironment environment, IEmailSender<ApplicationUser> emailSender,
 #pragma warning disable CS9107 // Parameter is captured into the state of the enclosing type and its value is also passed to the base constructor. The value might be captured by the base class as well.
-    IConfiguration configuration, ILogger<ChangeEmailController> logger) : AuthControllerBase(userManager, configuration, environment)
+    IConfiguration configuration, ILogger<ChangeEmailController> logger) : AuthControllerBase(userManager, roleManager, configuration, environment)
 #pragma warning restore CS9107 // Parameter is captured into the state of the enclosing type and its value is also passed to the base constructor. The value might be captured by the base class as well.
 {
 
@@ -31,10 +31,10 @@ public class ChangeEmailController(UserManager<ApplicationUser> userManager, IHo
             if (result.IsFailure) return Nok500<ChangeEmailResponse>(logger);
                 
             var email = HttpContext.User.Identity?.Name;
-            if (email.IsNullOrWhiteSpace()) return Nok500EmailIsNull<ChangeEmailResponse>(logger );
+            if (email.IsNullOrWhiteSpace()) return Nok400Email<ChangeEmailResponse>(logger );
 
             var user = email == null ? null : await userManager.FindByEmailAsync(email);
-            if (user == null) return Nok500CouldNotFindUser<ChangeEmailResponse>(logger);
+            if (user == null) return Nok404CouldNotFindUser<ChangeEmailResponse>(logger);
             
             var code = await userManager.GenerateChangeEmailTokenAsync(user, model.NewEmail ?? throw new InvalidOperationException("NewEmail was null"));
             code = Base64UrlEncode(UTF8.GetBytes(code));
@@ -46,11 +46,11 @@ public class ChangeEmailController(UserManager<ApplicationUser> userManager, IHo
 
             await emailSender.SendConfirmationLinkAsync(user, model.NewEmail, HtmlEncoder.Default.Encode(confirmationLink));
 
-            return Ok200<ChangeEmailResponse>("Resend Email Confirmation successful");
+            return Ok(new ChangeEmailResponse("Resend Email Confirmation successful"))  ;
         }
         catch (Exception exception)
         {
-            return Nok500<ChangeEmailResponse>(logger, exception);
+            return Nok500Exception<ChangeEmailResponse>(logger, exception);
         }
 
     }
