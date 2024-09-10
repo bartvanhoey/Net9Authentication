@@ -40,7 +40,7 @@ try
     builder.RegisterJwtAuthentication();
 
     builder.Services.SetupApiKeyFiltering();
-    builder.Services.SetupRateLimiting();
+    builder.SetupRateLimiting();
     
     Log.Information("Services registered");
 }
