@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Options;
 using Net9Auth.API.Database;
+using Net9Auth.API.Infrastructure.ApiKeys;
+using Net9Auth.API.Infrastructure.RateLimiting;
 using Net9Auth.API.Models;
 using Net9Auth.API.Services.Register;
 using Serilog;
@@ -19,6 +21,7 @@ try
     builder.SetupSerilog();
     Log.Information("Starting the web host");
     
+    // builder.Services.AddControllers(x => x.Filters.Add<StaticApiKeyWeatherForecastAuthorizationFilter>());
     builder.Services.AddControllers();
 
     builder.Services.AddOpenApi();
@@ -35,6 +38,9 @@ try
     builder.SetupEmailClient();
     builder.AddCorsPolicy();
     builder.RegisterJwtAuthentication();
+
+    builder.Services.SetupApiKeyFiltering();
+    builder.Services.SetupRateLimiting();
     
     Log.Information("Services registered");
 }
@@ -57,11 +63,15 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+// app.UseMiddleware<ApiKeyAuthMiddleware>();
+
 app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
 
 app.UseCors("CorsPolicy");
+
+app.UseRateLimiter();
 
 app.Run();

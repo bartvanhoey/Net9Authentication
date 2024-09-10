@@ -1,13 +1,13 @@
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.RateLimiting;
 using Net9Auth.Shared.Models.Weather;
 
 namespace Net9Auth.API.Controllers.Weatherforecast;
 
-[Authorize]
 [ApiController]
-[Route("api/secure-weather-forecast")]
-public class SecureWeatherForecastController(ILogger<WeatherForecastController> logger) : ControllerBase
+[EnableRateLimiting("fixed")]
+[Route("api/rate-limiting-weather-forecast")]
+public class RateLimitingWeatherForecastController(ILogger<RateLimitingWeatherForecastController> logger) : ControllerBase
 {
     private static readonly string[] Summaries =
     [
@@ -15,7 +15,6 @@ public class SecureWeatherForecastController(ILogger<WeatherForecastController> 
     ];
 
     [HttpGet]
-    
     public IEnumerable<WeatherForecast> Get()
     {
         return Enumerable.Range(1, 5).Select(index => new WeatherForecast

@@ -1,13 +1,14 @@
-using Microsoft.AspNetCore.Authorization;
+using System.Runtime.CompilerServices;
+using Azure.Core;
 using Microsoft.AspNetCore.Mvc;
+using Net9Auth.API.Infrastructure.ApiKeys.Static;
 using Net9Auth.Shared.Models.Weather;
 
 namespace Net9Auth.API.Controllers.Weatherforecast;
 
-[Authorize]
 [ApiController]
-[Route("api/secure-weather-forecast")]
-public class SecureWeatherForecastController(ILogger<WeatherForecastController> logger) : ControllerBase
+[Route("api/static-api-key-weather-forecast")]
+public class StaticApiKeyWeatherForecastController(ILogger<StaticApiKeyWeatherForecastController> logger) : ControllerBase
 {
     private static readonly string[] Summaries =
     [
@@ -15,9 +16,13 @@ public class SecureWeatherForecastController(ILogger<WeatherForecastController> 
     ];
 
     [HttpGet]
-    
+    [StaticApiKeyWeatherForecastAuthorizationFilter]
     public IEnumerable<WeatherForecast> Get()
     {
+        var context = HttpContext;
+
+        var tryGetValue = context.Request.Headers.TryGetValue("x-api-key", out var apiKey);
+
         return Enumerable.Range(1, 5).Select(index => new WeatherForecast
         {
             Date = DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
