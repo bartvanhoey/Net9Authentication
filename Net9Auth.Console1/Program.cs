@@ -1,6 +1,4 @@
-﻿using System.Net;
-using System.Text.Json;
-using Net9Auth.Console1;
+﻿using Net9Auth.Console1;
 using static System.Console;
 
 WriteLine("Hello, World from Console1!");

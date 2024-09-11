@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Net9Auth.API.Models;
+using Net9Auth.API.Models.ApiKeys;
 using Net9Auth.API.Models.Serilog;
 
 
@@ -15,11 +16,13 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     }
     
     public DbSet<Log> Logs { get; set; }
-
+    public DbSet<ApiKey> ApiKeys { get; set; }
     
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-    
+        modelBuilder.Entity<ApiKey>().HasIndex(k => k.Key).IsUnique();
+        
+        
         base.OnModelCreating(modelBuilder);
     }
 }

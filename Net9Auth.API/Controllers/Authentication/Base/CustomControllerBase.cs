@@ -97,4 +97,7 @@ public class CustomControllerBase : ControllerBase
         logger.Log<T>(_env, Status500InternalServerError, member, null, LogLevel.Error, errors == null
             ? "Errors is null"
             : Join(";", errors.Select(x => $"{x.Code} - {x.Description}").ToList()));
+
+    protected StatusCodeResult Nok500() => StatusCode(Status500InternalServerError);
+    protected StatusCodeResult Ok200() => StatusCode(Status200OK);
 }

@@ -1,8 +1,6 @@
 using System.Net.Http.Json;
-using Net9Auth.BlazorWasm.Services.Authentication.ConfirmEmail;
 using Net9Auth.BlazorWasm.Services.Authentication.ConfirmEmail.Models;
 using Net9Auth.BlazorWasm.Services.Authentication.ResendEmailConfirmation.Models;
-using Net9Auth.Shared.Models.Authentication.ConfirmEmail;
 using Net9Auth.Shared.Models.Authentication.ResendEmailConfirmation;
 using static Net9Auth.BlazorWasm.Services.Authentication.ResendEmailConfirmation.Models.AuthResendConfirmEmailConfirmationInfo;
 

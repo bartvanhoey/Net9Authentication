@@ -1,5 +1,3 @@
-using Net9Auth.Shared.Models.Authentication;
-
 namespace Net9Auth.API.Models.Authentication.Responses.Profile;
 
 public class ProfileResponse : IControllerResponse

@@ -1,6 +1,4 @@
-﻿using Net9Auth.Shared.Models.Authentication;
-
-namespace Net9Auth.API.Models.Authentication.Responses.IsEmailConfirmed;
+﻿namespace Net9Auth.API.Models.Authentication.Responses.IsEmailConfirmed;
 
 public class IsEmailConfirmedResponse : IControllerResponse
 {

@@ -1,5 +1,3 @@
-using System.Runtime.CompilerServices;
-using Azure.Core;
 using Microsoft.AspNetCore.Mvc;
 using Net9Auth.API.Infrastructure.ApiKeys.Static;
 using Net9Auth.Shared.Models.Weather;

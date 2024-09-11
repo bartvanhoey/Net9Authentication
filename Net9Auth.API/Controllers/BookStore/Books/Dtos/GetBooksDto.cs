@@ -1,4 +1,5 @@
-﻿using Net9Auth.API.Models.GenericHttp;
+﻿
+using Net9Auth.Shared.Infrastructure.Models;
 
 namespace Net9Auth.API.Controllers.BookStore.Books.Dtos;
 

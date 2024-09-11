@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Net9Auth.API.Controllers.BookStore.Authors.Dtos;
-using Net9Auth.API.Models.GenericHttp;
+
+using Net9Auth.Shared.Infrastructure.Models;
 using static Net9Auth.API.Controllers.BookStore.Authors.AuthorsResolver;
 
 namespace Net9Auth.API.Controllers.BookStore.Authors;

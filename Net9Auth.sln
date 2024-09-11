@@ -13,7 +13,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Net9Auth.Console1", "Net9Au
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Net9Auth.Console2", "Net9Auth.Console2\Net9Auth.Console2.csproj", "{53581434-A72C-457B-823D-71BCC07508EC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Net9Auth.ConsoleBookStore", "Net9Auth.ConsoleBookStore\Net9Auth.ConsoleBookStore.csproj", "{03749610-E3A4-4B6E-B576-02EDE39EC578}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Net9AuthConsoleBookStore", "Net9AuthConsoleBookStore\Net9AuthConsoleBookStore.csproj", "{57BC0E25-5179-4A75-B015-A92CFDB67BB3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +45,10 @@ Global
 		{03749610-E3A4-4B6E-B576-02EDE39EC578}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{03749610-E3A4-4B6E-B576-02EDE39EC578}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{03749610-E3A4-4B6E-B576-02EDE39EC578}.Release|Any CPU.Build.0 = Release|Any CPU
+		{57BC0E25-5179-4A75-B015-A92CFDB67BB3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{57BC0E25-5179-4A75-B015-A92CFDB67BB3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{57BC0E25-5179-4A75-B015-A92CFDB67BB3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{57BC0E25-5179-4A75-B015-A92CFDB67BB3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
