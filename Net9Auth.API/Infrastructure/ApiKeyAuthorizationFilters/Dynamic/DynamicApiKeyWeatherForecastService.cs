@@ -1,4 +1,4 @@
-namespace Net9Auth.API.Infrastructure.ApiKeys.Dynamic;
+namespace Net9Auth.API.Infrastructure.ApiKeyAuthorizationFilters.Dynamic;
 
 public class DynamicApiKeyWeatherForecastService : IDynamicApiKeyWeatherForecastService
 {

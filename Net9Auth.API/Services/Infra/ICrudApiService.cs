@@ -16,3 +16,4 @@ public interface ICrudApiService<T, in TC, in TU, in TL>
     
     Task<Result> DeleteAsync(Guid id);
 }
+

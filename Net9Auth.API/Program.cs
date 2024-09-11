@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Identity;
 using Net9Auth.API.Database;
-using Net9Auth.API.Infrastructure.ApiKeys;
+using Net9Auth.API.Infrastructure.ApiKeyAuthorizationFilters;
 using Net9Auth.API.Infrastructure.RateLimiting;
 using Net9Auth.API.Models;
 using Net9Auth.API.Services.Register;

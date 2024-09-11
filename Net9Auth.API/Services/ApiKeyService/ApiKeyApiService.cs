@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Net9Auth.API.Database;
 using Net9Auth.API.Infrastructure;
 using Net9Auth.API.Models.ApiKeys;
-
+using Net9Auth.Shared.Infrastructure.Extensions;
 using Net9Auth.Shared.Infrastructure.Functional;
 using Net9Auth.Shared.Infrastructure.Functional.Errors;
 using Net9Auth.Shared.Infrastructure.Models;
@@ -32,7 +32,11 @@ public class ApiKeyApiService : IApiKeyApiService
     {
         try
         {
-            var apiKeys = await _db.ApiKeys.Skip(input.SkipCount).Take(input.MaxResultCount).ToListAsync();
+            var apiKeys = input.Purpose.IsNullOrWhiteSpace()
+                ? await _db.ApiKeys.Skip(input.SkipCount).Take(input.MaxResultCount).ToListAsync()
+                : await _db.ApiKeys.Where(x => x.Purpose == input.Purpose).Skip(input.SkipCount)
+                    .Take(input.MaxResultCount).ToListAsync();
+
             var apiKeyDtos = _mapper.Map<List<ApiKey>, List<ApiKeyDto>>(apiKeys);
             return Ok(new PagedResultDto<ApiKeyDto>(apiKeys.Count, apiKeyDtos));
         }

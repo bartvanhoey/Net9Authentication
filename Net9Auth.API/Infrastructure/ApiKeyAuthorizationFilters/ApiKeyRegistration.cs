@@ -1,7 +1,7 @@
-﻿using Net9Auth.API.Infrastructure.ApiKeys.Dynamic;
-using Net9Auth.API.Infrastructure.ApiKeys.Static;
+﻿using Net9Auth.API.Infrastructure.ApiKeyAuthorizationFilters.Dynamic;
+using Net9Auth.API.Infrastructure.ApiKeyAuthorizationFilters.Static;
 
-namespace Net9Auth.API.Infrastructure.ApiKeys;
+namespace Net9Auth.API.Infrastructure.ApiKeyAuthorizationFilters;
 
 public static class ApiKeyRegistration
 {
@@ -9,6 +9,7 @@ public static class ApiKeyRegistration
    {
       services.AddScoped<StaticApiKeyWeatherForecastAuthorizationFilter>();
       services.AddScoped<DynamicApiKeyWeatherForecastAuthorizationFilter>();
+      services.AddScoped<DynamicApiKeyAggregatedLogAuthorizationFilter>();
       services.AddScoped<IDynamicApiKeyWeatherForecastService, DynamicApiKeyWeatherForecastService>();
    }
 }

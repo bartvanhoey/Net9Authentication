@@ -21,6 +21,7 @@ public class CreateApiKeyDto
 
 public class GetApiKeyListDto : PagedRequestDto
 {
+    public string? Purpose { get; set; }
 }
 
 public class ApiKeyDto

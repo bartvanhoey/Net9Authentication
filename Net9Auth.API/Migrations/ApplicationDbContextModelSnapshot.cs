@@ -155,7 +155,52 @@ namespace Net9Auth.API.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("Net9Auth.API.Models.ApiKeys.ApiKey", b =>
+            modelBuilder.Entity("Net9Auth.API.Models.AggregatedLogging.AggregatedLog", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("ClassName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ExceptionMessage")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ExceptionName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("LineNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("MethodName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("OriginCompany")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("OriginProgram")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("StackTrace")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("AggregatedLogs");
+                });
+
+            modelBuilder.Entity("Net9Auth.API.Models.ApiKeyAuthorizationFilters.ApiKey", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -195,7 +240,7 @@ namespace Net9Auth.API.Migrations
                     b.HasIndex("Key")
                         .IsUnique();
 
-                    b.ToTable("ApiKeys");
+                    b.ToTable("ApiKeyAuthorizationFilters");
                 });
 
             modelBuilder.Entity("Net9Auth.API.Models.ApplicationUser", b =>

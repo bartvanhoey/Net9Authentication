@@ -1,5 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
-using Net9Auth.API.Infrastructure.ApiKeys.Static;
+using Net9Auth.API.Infrastructure.ApiKeyAuthorizationFilters.Static;
 using Net9Auth.Shared.Models.Weather;
 
 namespace Net9Auth.API.Controllers.Weatherforecast;

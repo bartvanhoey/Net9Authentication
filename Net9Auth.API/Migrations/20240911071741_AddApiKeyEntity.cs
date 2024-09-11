@@ -12,7 +12,7 @@ namespace Net9Auth.API.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "ApiKeys",
+                name: "ApiKeyAuthorizationFilters",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
@@ -36,7 +36,7 @@ namespace Net9Auth.API.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "ApiKeys");
+                name: "ApiKeyAuthorizationFilters");
         }
     }
 }

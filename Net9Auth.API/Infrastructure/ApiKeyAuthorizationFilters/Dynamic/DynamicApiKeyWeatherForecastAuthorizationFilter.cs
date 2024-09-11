@@ -1,14 +1,15 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
+using Net9Auth.API.Infrastructure.Consts;
 using Net9Auth.Shared.Infrastructure.Extensions;
 
-namespace Net9Auth.API.Infrastructure.ApiKeys.Dynamic;
+namespace Net9Auth.API.Infrastructure.ApiKeyAuthorizationFilters.Dynamic;
 
 public class DynamicApiKeyWeatherForecastAuthorizationFilter :  Attribute, IAsyncAuthorizationFilter
 {
     public async Task OnAuthorizationAsync(AuthorizationFilterContext context)
     {
-        if (context.HttpContext.Request.Headers.TryGetValue(AuthConstants.ApiKeyHeaderName, out var contextApiKey))
+        if (context.HttpContext.Request.Headers.TryGetValue(ApplicationConstants.ApiKeyHeaderName, out var contextApiKey))
         {
             var apiKeyService = context.HttpContext.RequestServices.GetRequiredService<IDynamicApiKeyWeatherForecastService>();
             var apiKeys = await apiKeyService.GetDynamicApiKeysWeatherForecast();

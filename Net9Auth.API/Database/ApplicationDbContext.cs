@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Net9Auth.API.Models;
+using Net9Auth.API.Models.AggregatedLogging;
 using Net9Auth.API.Models.ApiKeys;
 using Net9Auth.API.Models.Serilog;
 
@@ -17,6 +18,8 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     
     public DbSet<Log> Logs { get; set; }
     public DbSet<ApiKey> ApiKeys { get; set; }
+    
+    public DbSet<AggregatedLog> AggregatedLogs { get; set; }
     
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

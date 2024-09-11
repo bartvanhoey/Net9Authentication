@@ -12,7 +12,7 @@ namespace Net9Auth.API.Migrations
         {
             migrationBuilder.AlterColumn<string>(
                 name: "Key",
-                table: "ApiKeys",
+                table: "ApiKeyAuthorizationFilters",
                 type: "nvarchar(450)",
                 nullable: false,
                 oldClrType: typeof(string),
@@ -20,7 +20,7 @@ namespace Net9Auth.API.Migrations
 
             migrationBuilder.CreateIndex(
                 name: "IX_ApiKeys_Key",
-                table: "ApiKeys",
+                table: "ApiKeyAuthorizationFilters",
                 column: "Key",
                 unique: true);
         }
@@ -30,11 +30,11 @@ namespace Net9Auth.API.Migrations
         {
             migrationBuilder.DropIndex(
                 name: "IX_ApiKeys_Key",
-                table: "ApiKeys");
+                table: "ApiKeyAuthorizationFilters");
 
             migrationBuilder.AlterColumn<string>(
                 name: "Key",
-                table: "ApiKeys",
+                table: "ApiKeyAuthorizationFilters",
                 type: "nvarchar(max)",
                 nullable: false,
                 oldClrType: typeof(string),
