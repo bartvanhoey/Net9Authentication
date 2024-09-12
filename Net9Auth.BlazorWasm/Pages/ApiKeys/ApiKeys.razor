@@ -1,0 +1,28 @@
+﻿@using Microsoft.AspNetCore.Components.QuickGrid
+
+@page "/admin/api-keys"
+
+<PageTitle>ApiKey Overview</PageTitle>
+
+<h1>ApiKey Overview</h1>
+
+<div class="mb-3">
+    <a href="/admin">Go to Administration Page</a>
+</div>
+
+<hr/>
+
+<div class="table-responsive">
+    <QuickGrid ItemsProvider="@ApiKeysProvider" Virtualize="true" Pagination="@Pagination" Class="table">
+        <TemplateColumn Title="Actions">
+            <button class="btn btn-primary" @onclick="@(() => GotoDetail(context))">Detail</button>
+            <button class="btn btn-primary" @onclick="@(() => CopyToClipboard(context))">Copy</button>
+        </TemplateColumn>
+        <PropertyColumn Property="@(p => p.Purpose)" Sortable="true" />
+        <PropertyColumn Property="@(p => p.CreatedAt)" Sortable="true"/>
+        <PropertyColumn Property="@(p => p.IsRevoked)" Sortable="true"/>
+        <PropertyColumn Property="@(p => p.IsDeleted)" Sortable="true"/>
+    </QuickGrid>
+</div>
+
+<Paginator State="@Pagination"/>

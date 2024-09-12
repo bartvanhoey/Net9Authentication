@@ -2,7 +2,7 @@ using Net9Auth.Shared.Infrastructure.Models;
 
 namespace Net9Auth.Shared.Models.AggregateLogging.ExceptionLogging;
 
-public class ExceptionLogUpdatedDto : IHaveISuccessAndErrorMessage
+public class ExceptionLogUpdatedDto : Infrastructure.Models.IHaveISuccessAndErrorMessage
 {
     public ExceptionLogUpdatedDto() => IsSuccess = true;
 

@@ -9,6 +9,7 @@
   <ItemGroup>
     <PackageReference Include="Blazored.LocalStorage" Version="4.5.0" />
     <PackageReference Include="Microsoft.AspNetCore.Components.Authorization" Version="9.0.0-preview.7.24406.2" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.QuickGrid" Version="9.0.0-preview.7.24406.2" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="9.0.0-preview.7.24406.2" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="9.0.0-preview.7.24406.2" PrivateAssets="all" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="9.0.0-preview.7.24405.7" />
@@ -42,6 +43,10 @@
 
   <ItemGroup>
     <AdditionalFiles Include="Pages\Account\Manage\Profile\Profile.razor" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Services\AggregatedLogging\ExceptionLogging\" />
   </ItemGroup>
 
 </Project>

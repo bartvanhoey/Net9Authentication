@@ -17,15 +17,25 @@ public class ApiKeyApiService : IApiKeyApiService
     private readonly ApplicationDbContext _db;
     private readonly IMapper _mapper;
 
-    public ApiKeyApiService(ApplicationDbContext db, IMapper mapper )
+    public ApiKeyApiService(ApplicationDbContext db, IMapper mapper)
     {
         _db = db;
         _mapper = mapper;
     }
-    
-    public Task<Result<ApiKeyDto>> GetAsync(Guid id)
+
+    public async Task<Result<ApiKeyDto>> GetAsync(Guid id)
     {
-        throw new NotImplementedException();
+        try
+        {
+            var apiKey = await _db.ApiKeys.FirstOrDefaultAsync(x => x.Id == id);
+            if (apiKey == null) return Fail<ApiKeyDto>(ResultErrorFactory.NotFound(id.ToString()));
+            var apiKeyDtos = _mapper.Map<ApiKey, ApiKeyDto>(apiKey);
+            return Ok(apiKeyDtos);
+        }
+        catch (Exception exception)
+        {
+            return Fail<ApiKeyDto>(new BasicResultError(exception.Message));
+        }
     }
 
     public async Task<Result<PagedResultDto<ApiKeyDto>>> GetListAsync(GetApiKeyListDto input)
@@ -60,7 +70,7 @@ public class ApiKeyApiService : IApiKeyApiService
         }
         catch (Exception exception)
         {
-           return Fail<ApiKeyDto>(new BasicResultError(exception.Message));
+            return Fail<ApiKeyDto>(new BasicResultError(exception.Message));
         }
     }
 
@@ -68,7 +78,7 @@ public class ApiKeyApiService : IApiKeyApiService
     {
         try
         {
-            var dbApiKey =  await _db.ApiKeys.FirstOrDefaultAsync(x => x.Id == id);
+            var dbApiKey = await _db.ApiKeys.FirstOrDefaultAsync(x => x.Id == id);
             if (dbApiKey == null) throw new ArgumentNullException(nameof(dbApiKey));
             _mapper.Map(input, dbApiKey);
             await _db.SaveChangesAsync();
@@ -84,5 +94,9 @@ public class ApiKeyApiService : IApiKeyApiService
     {
         throw new NotImplementedException();
     }
-}
 
+    public Task<Result> RevokeAsync(Guid id, string revokeReason)
+    {
+        throw new NotImplementedException();
+    }
+}

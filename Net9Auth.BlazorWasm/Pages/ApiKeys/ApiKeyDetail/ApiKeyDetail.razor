@@ -1,0 +1,92 @@
+﻿@page "/admin/api-keys/detail/{id}"
+
+<PageTitle>ApiKey Detail</PageTitle>
+
+<h1>ApiKey Detail</h1>
+
+<div class="mb-3">
+    <a href="/admin/api-keys">Go to ApiKeys Overview</a>
+</div>
+
+
+@if (ErrorMessage != null)
+{
+    <StatusMessage Message="@ErrorMessage"></StatusMessage>
+}
+
+@if (ShowSpinner)
+{
+    <div class="spinner"></div>
+}
+
+
+@if (ApiKeyDto != null)
+{
+    <div class="mb-3">
+        <label for="apiKeyKey" class="form-label">Key</label>
+        <input disabled type="text" class="form-control" id="apiKeyKey" value="@ApiKeyDto.Key">
+    </div>
+
+    <div class="mb-3">
+        <label for="apiKeyPurpose" class="form-label">Purpose</label>
+        <input disabled type="text" class="form-control" id="apiKeyPurpose" value="@ApiKeyDto.Purpose">
+    </div>
+
+    <div class="mb-3">
+        <label for="apiKeyCreatedAt" class="form-label">CreatedAt</label>
+        <input disabled type="text" class="form-control" id="apiKeyCreatedAt" value="@ApiKeyDto.CreatedAt">
+    </div>
+
+
+    <div class="mb-3">
+        <label for="apiKeyCreatedBy" class="form-label">Created By</label>
+        <input disabled type="email" class="form-control" id="apiKeyCreatedBy" value="@ApiKeyDto.CreatedBy">
+    </div>
+
+    <div class="mb-3">
+        <label for="apiKeyExpiryDate" class="form-label">Expiry Date</label>
+        <input disabled type="text" class="form-control" id="apiKeyExpiryDate" value="@ApiKeyDto.ExpiryDate">
+    </div>
+
+    <div class="mb-3 form-check">
+        <label for="apiKeyIsRevoked" class="form-check-label">IsRevoked?</label>
+        <input disabled type="checkbox" class="form-check-input" id="apiKeyIsRevoked" @bind="@ApiKeyDto.IsRevoked"/>
+    </div>
+
+    <div class="mb-3">
+        <label for="apiKeyRevokedAt" class="form-label">RevokedAt</label>
+        <input disabled type="text" class="form-control" id="apiKeyRevokedAt" value="@ApiKeyDto?.RevokedAt">
+    </div>
+
+    <div class="mb-3">
+        <label for="apiKeyRevokedBy" class="form-label">Revoked By</label>
+        <input disabled type="email" class="form-control" id="apiKeyRevokedBy" value="@ApiKeyDto?.RevokedBy"/>
+    </div>
+
+    <div class="mb-3">
+        <label for="apiKeyRevokeReason" class="form-label">RevokeReason</label>
+        <input disabled type="text" class="form-control" id="apiKeyRevokeReason" value="@ApiKeyDto?.RevokeReason"/>
+    </div>
+
+    <div class="mb-3 form-check">
+        <label for="apiKeyIsDeleted" class="form-check-label">IsDeleted?</label>
+        <input disabled type="checkbox" class="form-check-input" id="apiKeyIsDeleted" value="@ApiKeyDto?.IsDeleted"/>
+    </div>
+
+    <div class="mb-3">
+        <label for="apiKeyDeletedAt" class="form-label">DeletedAt</label>
+        <input disabled type="text" class="form-control" id="apiKeyDeletedAt" value="@ApiKeyDto?.DeletedAt"/>
+    </div>
+
+    <div class="mb-3">
+        <label for="apiKeyDeletedBy" class="form-label">Deleted By</label>
+        <input disabled type="email" class="form-control" id="apiKeyDeletedBy" value="@ApiKeyDto?.DeletedBy"/>
+    </div>
+
+    <div class="mb-3">
+        <label for="apiKeyDeleteReason" class="form-label">DeleteReason</label>
+        <input disabled type="text" class="form-control" id="apiKeyDeleteReason" value="@ApiKeyDto?.DeleteReason"/>
+    </div>
+}
+
+

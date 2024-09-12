@@ -40,11 +40,32 @@
                         <span class="bi bi-person-fill-nav-menu" aria-hidden="true"></span> @context.User.Identity?.Name
                     </NavLink>
                 </div>
+
+                <div class="nav-item px-3">
+                    <NavLink class="nav-link" href="admin/api-keys">
+                        <span class="bi bi-person-fill-nav-menu" aria-hidden="true"></span> Api Keys
+                    </NavLink>
+                </div>
+
+                <div class="nav-item px-3">
+                    <NavLink class="nav-link" href="admin/exception-Logging">
+                        <span class="bi bi-person-fill-nav-menu" aria-hidden="true"></span> Exception Logging
+                    </NavLink>
+                </div>
+
+                <div class="nav-item px-3">
+                    <NavLink class="nav-link" href="Account/Manage/Profile">
+                        <span class="bi bi-person-fill-nav-menu" aria-hidden="true"></span> @context.User.Identity?.Name
+                    </NavLink>
+                </div>
+                
                 <div class="nav-item px-3">
                     <button class="nav-link" @onclick="Logout">
                         <span class="bi bi-arrow-bar-left-nav-menu" aria-hidden="true"></span> Logout
                     </button>
                 </div>
+                
+                
             </Authorized>
             <NotAuthorized>
                 <div class="nav-item px-3">
