@@ -13,21 +13,28 @@ namespace Net9Auth.BlazorWasm.Pages.ApiKeys;
 
 public partial class ApiKeys : ComponentBase
 {
-    protected readonly PaginationState? Pagination = new() { ItemsPerPage = 10 };
-
-    protected GridItemsProvider<ApiKeyDto>? ApiKeysProvider;
+    private readonly PaginationState? _pagination = new() { ItemsPerPage = 10 };
+    private GridItemsProvider<ApiKeyDto>? _apiKeysProvider;
     [Inject] protected NavigationManager? NavigationManager { get; set; }
     [Inject] protected IApiKeyService? ApiKeyService { get; set; }
 
+    private long _numResults = 0;
+    private bool ShowSpinner { get; set; }
+
     protected override Task OnInitializedAsync()
     {
-        ApiKeysProvider = async req =>
+        _apiKeysProvider = async req =>
         {
             var result = await GetApiKeysAsync();
             if (result.IsFailure) return GridItemsProviderResult.From(Empty<ApiKeyDto>(), 0);
 
+
             if (result.Value?.Items == null || result.Value.Items.Count == 0)
+            {
+                if (result.Value != null) _numResults = result.Value.TotalCount;
                 return GridItemsProviderResult.From(Empty<ApiKeyDto>(), 0);
+            }
+
 
             StateHasChanged();
 
@@ -35,7 +42,6 @@ public partial class ApiKeys : ComponentBase
                 result.Value.Items.Skip(req.StartIndex).Take(10).ToList(),
                 result.Value.Items.Count);
         };
-
         return Task.CompletedTask;
     }
 

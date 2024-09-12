@@ -2,7 +2,7 @@
 
 public static class ApplicationConstants
 {
-    public const string ApiKeySectionName = "Authentication:ApiKey";
+    public const string ApiKeySectionName = "ApiKeyAuthentication:StaticApiKey";
     public const string ApiKeyHeaderName = "x-api-key";
 
     public const string ExceptionLoggingPurpose = "exception-logging";

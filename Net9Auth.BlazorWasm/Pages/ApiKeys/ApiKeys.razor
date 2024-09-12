@@ -12,17 +12,24 @@
 
 <hr/>
 
-<div class="table-responsive">
-    <QuickGrid ItemsProvider="@ApiKeysProvider" Virtualize="true" Pagination="@Pagination" Class="table">
-        <TemplateColumn Title="Actions">
-            <button class="btn btn-primary" @onclick="@(() => GotoDetail(context))">Detail</button>
-            <button class="btn btn-primary" @onclick="@(() => CopyToClipboard(context))">Copy</button>
-        </TemplateColumn>
-        <PropertyColumn Property="@(p => p.Purpose)" Sortable="true" />
-        <PropertyColumn Property="@(p => p.CreatedAt)" Sortable="true"/>
-        <PropertyColumn Property="@(p => p.IsRevoked)" Sortable="true"/>
-        <PropertyColumn Property="@(p => p.IsDeleted)" Sortable="true"/>
-    </QuickGrid>
-</div>
+<AddApiKey/>
 
-<Paginator State="@Pagination"/>
+
+@if (_numResults > 0)
+{
+    <div class="table-responsive">
+        <QuickGrid ItemsProvider="@_apiKeysProvider" Virtualize="true" Pagination="@_pagination" Class="table">
+            <TemplateColumn Title="Actions">
+                <button class="btn btn-primary" @onclick="@(() => GotoDetail(context))">Detail</button>
+                <button class="btn btn-primary" @onclick="@(() => CopyToClipboard(context))">Copy</button>
+            </TemplateColumn>
+            <PropertyColumn Property="@(p => p.Purpose)" Sortable="true"/>
+            <PropertyColumn Property="@(p => p.CreatedAt)" Sortable="true"/>
+            <PropertyColumn Property="@(p => p.IsRevoked)" Sortable="true"/>
+            <PropertyColumn Property="@(p => p.IsDeleted)" Sortable="true"/>
+        </QuickGrid>
+    </div>
+}
+<Paginator State="@_pagination"/>
+
+<p>No Api Keys in list</p>
