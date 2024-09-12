@@ -3,9 +3,6 @@ using static System.Console;
 
 WriteLine("Hello, World from Console1!");
 
-var aggregatedLogTester = new DynamicApiKeyAggregatedLogControllerTester();
-await aggregatedLogTester.Start();
-
 var staticApiKeyTester = new StaticApiKeyWeatherForecastControllerTester();
 await staticApiKeyTester.Start();
 

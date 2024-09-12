@@ -1,6 +1,6 @@
-namespace Net9Auth.Shared.Models.AggregateLogging;
+namespace Net9Auth.Shared.Models.AggregateLogging.ExceptionLogging;
 
-public class AggregatedLogDto
+public class ExceptionLogDto
 {
     public Guid Id { get; set; }
     public DateTime CreatedAt { get; set; }

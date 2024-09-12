@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Net9Auth.Shared.Models.AggregateLogging;
+namespace Net9Auth.Shared.Models.AggregateLogging.ExceptionLogging;
 
-public class UpdateAggregatedLogDto
+public class UpdateExceptionLogDto
 {
     public Guid Id { get; set; }
     [Required] public bool Revoked { get; set; }

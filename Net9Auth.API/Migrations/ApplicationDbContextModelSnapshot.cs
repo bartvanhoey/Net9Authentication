@@ -155,29 +155,46 @@ namespace Net9Auth.API.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("Net9Auth.API.Models.AggregatedLogging.AggregatedLog", b =>
+            modelBuilder.Entity("Net9Auth.API.Models.AggregatedLogging.ExceptionLogging.ExceptionLog", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<string>("ApplicationName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("ApplicationTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("AssignedTo")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("ClassName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Description")
+                    b.Property<string>("Company")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CustomData")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Environment")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<long>("ExceptionFrequency")
+                        .HasColumnType("bigint");
 
                     b.Property<string>("ExceptionMessage")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("ExceptionName")
+                    b.Property<string>("ExceptionType")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
+                    b.Property<DateTime>("InsertTime")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("LineNumber")
                         .HasColumnType("nvarchar(max)");
@@ -185,22 +202,33 @@ namespace Net9Auth.API.Migrations
                     b.Property<string>("MethodName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("OriginCompany")
+                    b.Property<string>("RequestDetails")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("OriginProgram")
-                        .IsRequired()
+                    b.Property<string>("ResolutionNotes")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ResolutionStatus")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("SecurityLevel")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ServerInfo")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("StackTrace")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("UserInfo")
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("Id");
 
-                    b.ToTable("AggregatedLogs");
+                    b.ToTable("ExceptionLogs");
                 });
 
-            modelBuilder.Entity("Net9Auth.API.Models.ApiKeyAuthorizationFilters.ApiKey", b =>
+            modelBuilder.Entity("Net9Auth.API.Models.ApiKeys.ApiKey", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -240,7 +268,7 @@ namespace Net9Auth.API.Migrations
                     b.HasIndex("Key")
                         .IsUnique();
 
-                    b.ToTable("ApiKeyAuthorizationFilters");
+                    b.ToTable("ApiKeys");
                 });
 
             modelBuilder.Entity("Net9Auth.API.Models.ApplicationUser", b =>

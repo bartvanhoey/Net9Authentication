@@ -21,6 +21,15 @@ public class CreateApiKeyDto
 
 public class GetApiKeyListDto : PagedRequestDto
 {
+    public GetApiKeyListDto()
+    {
+    }
+
+    public GetApiKeyListDto(string? purpose)
+    {
+        Purpose = purpose;
+    }
+
     public string? Purpose { get; set; }
 }
 

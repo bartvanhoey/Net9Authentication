@@ -7,22 +7,22 @@ using static Net9Auth.API.Infrastructure.Consts.ApplicationConstants;
 
 namespace Net9Auth.API.Infrastructure.ApiKeyAuthorizationFilters.Dynamic;
 
-public class DynamicApiKeyAggregatedLogAuthorizationFilter : Attribute, IAsyncAuthorizationFilter
+public class DynamicApiKeyExceptionLogAuthorizationFilter : Attribute, IAsyncAuthorizationFilter
 {
     public async Task OnAuthorizationAsync(AuthorizationFilterContext context)
     {
         if (context.HttpContext.Request.Headers.TryGetValue(ApiKeyHeaderName, out var contextApiKey))
         {
-            var apiKeyService = context.HttpContext.RequestServices.GetRequiredService<IApiKeyApiService>();
-            var apiKeyResult = await apiKeyService.GetListAsync(new GetApiKeyListDto {Purpose = AggregatedLoggingPurpose});
-            if (apiKeyResult.IsFailure)
-                context.Result = new UnauthorizedObjectResult(apiKeyResult.Error?.Message ?? "Unknown reason");
+            var svc = context.HttpContext.RequestServices.GetRequiredService<IApiKeyApiService>();
+            var apiKeysResult = await svc.GetListAsync(new GetApiKeyListDto(ExceptionLoggingPurpose));
+            if (apiKeysResult.IsFailure)
+                context.Result = new UnauthorizedObjectResult(apiKeysResult.Error?.Message ?? "Unknown reason");
 
             var apiKey = contextApiKey.FirstOrDefault();
             if (apiKey == null || apiKey.IsNullOrWhiteSpace())
                 context.Result = new UnauthorizedObjectResult("API key missing");
 
-            var apiKeys = apiKeyResult.Value.Items.Select(x => x.Key).ToList();
+            var apiKeys = apiKeysResult.Value.Items.Select(x => x.Key).ToList();
             if (apiKeys.Count == 0)
                 context.Result = new UnauthorizedObjectResult("No API keys in list");
 

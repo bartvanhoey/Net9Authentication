@@ -9,7 +9,7 @@ public static class ApiKeyRegistration
    {
       services.AddScoped<StaticApiKeyWeatherForecastAuthorizationFilter>();
       services.AddScoped<DynamicApiKeyWeatherForecastAuthorizationFilter>();
-      services.AddScoped<DynamicApiKeyAggregatedLogAuthorizationFilter>();
+      services.AddScoped<DynamicApiKeyExceptionLogAuthorizationFilter>();
       services.AddScoped<IDynamicApiKeyWeatherForecastService, DynamicApiKeyWeatherForecastService>();
    }
 }

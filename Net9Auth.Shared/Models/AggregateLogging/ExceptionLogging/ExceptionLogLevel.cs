@@ -1,6 +1,6 @@
-namespace Net9Auth.Shared.Models.AggregateLogging;
+namespace Net9Auth.Shared.Models.AggregateLogging.ExceptionLogging;
 
-public enum AggregatedLogLevel
+public enum ExceptionLogLevel
 {
     /// <summary>
     /// Anything and everything you might want to know about a running block of code.
