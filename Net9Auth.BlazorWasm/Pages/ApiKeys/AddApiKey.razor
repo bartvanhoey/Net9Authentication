@@ -6,19 +6,21 @@
 
     <div class="row g-3">
         <div class="col-auto">
-            <label for="purpose" class="visually-hidden">Email</label>
-            <input type="text" readonly class="form-control-plaintext" id="purpose" value="Purpopse">
+            <button type="submit" class="btn btn-primary mb-3">Create API Key</button>
         </div>
         <div class="col-auto">
             <label for="purposeSelect" class="visually-hidden">Password</label>
-            <InputSelect id="purposeSelect" @bind-Value="Model!.Purpose">
+            <select class="form-select" id="purposeSelect" @bind-Value="Model!.Purpose">
+                <option selected disabled value="exception-logging">Select Purpose</option>
                 <option value="exception-logging">Exception Logging</option>
                 <option value="another-purpose">Another Purpose</option>
-            </InputSelect>
+            </select>
         </div>
         <div class="col-auto">
-            <button type="submit" class="btn btn-primary mb-3">Create API Key</button>
+            <label for="purpose" class="visually-hidden">Email</label>
+            <input type="text" readonly class="form-control-plaintext" id="purpose" value="Purpose">
         </div>
+        
     </div>
 </EditForm>
 

@@ -12,6 +12,30 @@ namespace Net9Auth.API.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
+                name: "ApiKeys",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Key = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Purpose = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ExpiryDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    IsRevoked = table.Column<bool>(type: "bit", nullable: false),
+                    RevokedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    RevokedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    RevokeReason = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
+                    DeletedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    DeletedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    DeleteReason = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ApiKeys", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "AspNetRoles",
                 columns: table => new
                 {
@@ -50,6 +74,37 @@ namespace Net9Auth.API.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ExceptionLogs",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    ExceptionType = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ExceptionMessage = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    StackTrace = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ClassName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    MethodName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    LineNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    InsertTime = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ApplicationName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ApplicationTime = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    Company = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Environment = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    UserInfo = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    RequestDetails = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ServerInfo = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CustomData = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    SecurityLevel = table.Column<int>(type: "int", nullable: true),
+                    ResolutionStatus = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ExceptionFrequency = table.Column<long>(type: "bigint", nullable: false),
+                    AssignedTo = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ResolutionNotes = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ExceptionLogs", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -177,6 +232,12 @@ namespace Net9Auth.API.Migrations
                 });
 
             migrationBuilder.CreateIndex(
+                name: "IX_ApiKeys_Key",
+                table: "ApiKeys",
+                column: "Key",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
                 column: "RoleId");
@@ -220,6 +281,9 @@ namespace Net9Auth.API.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
+                name: "ApiKeys");
+
+            migrationBuilder.DropTable(
                 name: "AspNetRoleClaims");
 
             migrationBuilder.DropTable(
@@ -233,6 +297,9 @@ namespace Net9Auth.API.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUserTokens");
+
+            migrationBuilder.DropTable(
+                name: "ExceptionLogs");
 
             migrationBuilder.DropTable(
                 name: "Logs");
