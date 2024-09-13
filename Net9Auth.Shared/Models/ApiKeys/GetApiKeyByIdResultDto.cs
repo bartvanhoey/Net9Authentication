@@ -1,6 +1,6 @@
 ﻿namespace Net9Auth.Shared.Models.ApiKeys;
 
-public class GetApiKeyByIdResultDto : IHaveISuccessAndErrorMessage
+public class GetApiKeyByIdResultDto : ICtrlResult
 {
     public ApiKeyDto? ApiKeyDto { get; set; }
 

@@ -42,7 +42,7 @@ public static class HttpRequestExtensions
     {
         try
         {
-            var accessToken = GetAccessTokenFromRequest(request);
+            var accessToken = request.GetAccessTokenFromRequest();
             if (accessToken.IsNullOrWhiteSpace()) return Fail<string>(new BasicResultError("accessToken is null"));
             var nameId = new JwtSecurityTokenHandler().ReadJwtToken(accessToken).Claims
                 .First(claim => claim.Type == ClaimTypes.NameIdentifier);

@@ -42,7 +42,7 @@ public class Result
     // ReSharper disable once NullableWarningSuppressionIsUsed
     public static Result<T> Fail<T>(BaseResultError? resultError) => new(default!, false, resultError);
     // ReSharper disable once NullableWarningSuppressionIsUsed
-    public static Result<T> Fail<T>(string resultError) => new(default!, false, new ResultError(resultError));
+    public static Result<T> Fail<T>(string? resultError) => new(default!, false, new ResultError(resultError ?? "reason unknown"));
 
     public static Result Ok() => new(true);
 

@@ -1,6 +1,6 @@
 namespace Net9Auth.Shared.Models;
 
-public interface IHaveISuccessAndErrorMessage
+public interface ICtrlResult
 {
     public bool IsSuccess { get; set; }
     public string? ErrorMessage { get; set; }

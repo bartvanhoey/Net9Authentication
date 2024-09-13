@@ -19,9 +19,13 @@ public partial class ApiKeys : ComponentBase
     [Inject] protected IApiKeyService? ApiKeyService { get; set; }
 
     private long _numResults = 0;
-    private bool ShowSpinner { get; set; }
+    protected bool ShowSpinner { get; set; }
+    public string ApiKey { get; set; } = String.Empty;
+    public string Message { get; set; } = String.Empty;
 
-    protected override Task OnInitializedAsync()
+    protected override Task OnInitializedAsync() => LoadGridItemsAsync();
+
+    private Task LoadGridItemsAsync()
     {
         _apiKeysProvider = async req =>
         {
@@ -35,7 +39,6 @@ public partial class ApiKeys : ComponentBase
                 return GridItemsProviderResult.From(Empty<ApiKeyDto>(), 0);
             }
 
-
             StateHasChanged();
 
             return GridItemsProviderResult.From(
@@ -45,11 +48,26 @@ public partial class ApiKeys : ComponentBase
         return Task.CompletedTask;
     }
 
+    private async Task ApiKeyCreated_Handler(ApiKeyDto apiKeyDto)
+    {
+        Message = "ApiKey Created";
+        ApiKey = apiKeyDto.Key;
+        
+        await LoadGridItemsAsync();
+    }
+
+
     private async Task<Result<PagedResultDto<ApiKeyDto>?>> GetApiKeysAsync()
     {
-        if (ApiKeyService == null) return Fail<PagedResultDto<ApiKeyDto>?>(ApiServiceIsNull(""));
-        var getListResult = await ApiKeyService.GetListAsync(new GetApiKeyListDto());
-        return getListResult.IsSuccess ? getListResult : Fail<PagedResultDto<ApiKeyDto>?>(getListResult.Error);
+        Result<PagedResultDto<ApiKeyDto>?> ret;
+        if (ApiKeyService == null) ret = Fail<PagedResultDto<ApiKeyDto>?>(ApiServiceIsNull(""));
+        else
+        {
+            var getListResult = await ApiKeyService.GetListAsync(new GetApiKeyListCtrlInput());
+            ret = getListResult.IsSuccess ? getListResult : Fail<PagedResultDto<ApiKeyDto>?>(getListResult.Error);
+        }
+
+        return ret;
     }
 
     private void GotoDetail(ApiKeyDto user) => NavigationManager?.NavigateTo($"admin/api-keys/detail/{user.Id}", true);

@@ -1,13 +1,14 @@
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using Net9Auth.API.Database;
-using Net9Auth.API.Infrastructure;
 using Net9Auth.API.Models.ApiKeys;
 using Net9Auth.Shared.Infrastructure.Extensions;
 using Net9Auth.Shared.Infrastructure.Functional;
 using Net9Auth.Shared.Infrastructure.Functional.Errors;
 using Net9Auth.Shared.Infrastructure.Models;
 using Net9Auth.Shared.Models.ApiKeys;
+using static System.DateTime;
+using static Net9Auth.API.Infrastructure.ApiKeyGenerator;
 using static Net9Auth.Shared.Infrastructure.Functional.Result;
 
 namespace Net9Auth.API.Services.ApiKeyService;
@@ -48,7 +49,7 @@ public class ApiKeyApiService : IApiKeyApiService
                     .Take(input.MaxResultCount).ToListAsync();
 
             var apiKeyDtos = _mapper.Map<List<ApiKey>, List<ApiKeyDto>>(apiKeys);
-            return Ok(new PagedResultDto<ApiKeyDto>(apiKeys.Count, apiKeyDtos));
+            return Ok(new PagedResultDto<ApiKeyDto>(apiKeys.Count, apiKeyDtos.OrderByDescending(x => x.CreatedAt).ToList()));
         }
         catch (Exception exception)
         {
@@ -61,8 +62,9 @@ public class ApiKeyApiService : IApiKeyApiService
         try
         {
             var apiKey = _mapper.Map<CreateApiKeyDto, ApiKey>(createDto);
-            var key = ApiKeyGenerator.GenerateApiKey();
+            var key = GenerateApiKey();
             apiKey.Key = key;
+            apiKey.CreatedAt = UtcNow;
             var createdEntry = await _db.ApiKeys.AddAsync(apiKey);
             await _db.SaveChangesAsync();
             var apiKeyDto = _mapper.Map<ApiKey, ApiKeyDto>(createdEntry.Entity);
