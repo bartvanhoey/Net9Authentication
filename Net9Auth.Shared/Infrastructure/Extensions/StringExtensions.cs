@@ -7,10 +7,15 @@ namespace Net9Auth.Shared.Infrastructure.Extensions;
 
 public static class StringExtensions
 {
-    public static T? ConvertTo<T>(this string jsonString) => JsonSerializer.Deserialize<T>(jsonString, new JsonSerializerOptions
-    {
-        PropertyNameCaseInsensitive = true
-    });
+    
+    public static T ToType<T>(this string jsonString) where T : class =>
+        jsonString switch
+        {
+            null => throw new ArgumentNullException($"ToType: You cannot convert a null string to a Type"),
+            "[]" => default,
+            _ => JsonSerializer.Deserialize<T>(jsonString,
+                new JsonSerializerOptions { PropertyNameCaseInsensitive = true })
+        } ?? throw new InvalidOperationException();
 
     public static string AddUrlParameters(this string url, IDictionary<string, object?> parameters)
     {

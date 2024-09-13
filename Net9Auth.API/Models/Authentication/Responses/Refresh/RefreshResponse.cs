@@ -1,6 +1,4 @@
-﻿using Net9Auth.Shared.Models.Authentication;
-
-namespace Net9Auth.API.Models.Authentication.Responses.Refresh;
+﻿namespace Net9Auth.API.Models.Authentication.Responses.Refresh;
 
 public class RefreshResponse : IControllerResponse
 {

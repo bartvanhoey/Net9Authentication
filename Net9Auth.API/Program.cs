@@ -1,11 +1,10 @@
-using System.Security.Claims;
-using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.Extensions.DependencyInjection.Extensions;
-using Microsoft.Extensions.Options;
 using Net9Auth.API.Database;
+using Net9Auth.API.Infrastructure.ApiKeyAuthorizationFilters;
+using Net9Auth.API.Infrastructure.RateLimiting;
 using Net9Auth.API.Models;
 using Net9Auth.API.Services.Register;
+using Net9Auth.API.Services.Registration;
 using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -19,13 +18,16 @@ try
     builder.SetupSerilog();
     Log.Information("Starting the web host");
     
+    // builder.Services.AddControllers(x => x.Filters.Add<StaticApiKeyWeatherForecastAuthorizationFilter>());
     builder.Services.AddControllers();
 
     builder.Services.AddOpenApi();
 
-    builder.RegisterSwagger();
-    builder.RegisterDatabase();
+    builder.SetupSwagger();
+    builder.SetupDatabase();
 
+    builder.Services.AddAutoMapper(typeof(Program));
+    
     builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = true)
         .AddRoles<IdentityRole>()
         .AddEntityFrameworkStores<ApplicationDbContext>()
@@ -34,7 +36,13 @@ try
 
     builder.SetupEmailClient();
     builder.AddCorsPolicy();
-    builder.RegisterJwtAuthentication();
+    
+    builder.RegisterServices();
+    
+    builder.SetupJwtAuthentication();
+
+    builder.Services.SetupApiKeyFiltering();
+    builder.SetupRateLimiting();
     
     Log.Information("Services registered");
 }
@@ -57,11 +65,15 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+// app.UseMiddleware<ApiKeyAuthMiddleware>();
+
 app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
 
 app.UseCors("CorsPolicy");
+
+app.UseRateLimiter();
 
 app.Run();

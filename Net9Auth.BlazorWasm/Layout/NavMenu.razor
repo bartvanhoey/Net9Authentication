@@ -40,16 +40,37 @@
                         <span class="bi bi-person-fill-nav-menu" aria-hidden="true"></span> @context.User.Identity?.Name
                     </NavLink>
                 </div>
+
+                <div class="nav-item px-3">
+                    <NavLink class="nav-link" href="admin/api-keys">
+                        <span class="bi bi-person-fill-nav-menu" aria-hidden="true"></span> Api Keys
+                    </NavLink>
+                </div>
+
+                <div class="nav-item px-3">
+                    <NavLink class="nav-link" href="admin/exception-Logging">
+                        <span class="bi bi-person-fill-nav-menu" aria-hidden="true"></span> Exception Logging
+                    </NavLink>
+                </div>
+
+                <div class="nav-item px-3">
+                    <NavLink class="nav-link" href="Account/Manage/Profile">
+                        <span class="bi bi-person-fill-nav-menu" aria-hidden="true"></span> @context.User.Identity?.Name
+                    </NavLink>
+                </div>
+                
                 <div class="nav-item px-3">
                     <button class="nav-link" @onclick="Logout">
                         <span class="bi bi-arrow-bar-left-nav-menu" aria-hidden="true"></span> Logout
                     </button>
                 </div>
+                
+                
             </Authorized>
             <NotAuthorized>
                 <div class="nav-item px-3">
-                    <NavLink class="nav-link" href="Account/Register">
-                        <span class="bi bi-person-nav-menu" aria-hidden="true"></span> Register
+                    <NavLink class="nav-link" href="Account/Registration">
+                        <span class="bi bi-person-nav-menu" aria-hidden="true"></span> Registration
                     </NavLink>
                 </div>
                 <div class="nav-item px-3">
@@ -61,6 +82,18 @@
                 <div class="nav-item px-3">
                     <NavLink class="nav-link" href="weather">
                         <span class="bi bi-list-nested-nav-menu" aria-hidden="true"></span> Weather
+                    </NavLink>
+                </div>
+
+                <div class="nav-item px-3">
+                    <NavLink class="nav-link" href="books">
+                        <span class="bi bi-list-nested-nav-menu" aria-hidden="true"></span> Books
+                    </NavLink>
+                </div>
+
+                <div class="nav-item px-3">
+                    <NavLink class="nav-link" href="authors">
+                        <span class="bi bi-list-nested-nav-menu" aria-hidden="true"></span> Authors
                     </NavLink>
                 </div>
             </NotAuthorized>

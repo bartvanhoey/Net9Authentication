@@ -1,0 +1,50 @@
+﻿@using Net9Auth.BlazorWasm.Services.ApiKeys
+@using Net9Auth.Shared.Models.ApiKeys
+<EditForm Model="Model" OnValidSubmit="CreateApiKeyAsync" FormName="Starship3">
+    <DataAnnotationsValidator/>
+    <ValidationSummary/>
+
+    <div class="row g-3">
+        <div class="col-auto">
+            <label for="purpose" class="visually-hidden">Email</label>
+            <input type="text" readonly class="form-control-plaintext" id="purpose" value="Purpopse">
+        </div>
+        <div class="col-auto">
+            <label for="purposeSelect" class="visually-hidden">Password</label>
+            <InputSelect id="purposeSelect" @bind-Value="Model!.Purpose">
+                <option value="exception-logging">Exception Logging</option>
+                <option value="another-purpose">Another Purpose</option>
+            </InputSelect>
+        </div>
+        <div class="col-auto">
+            <button type="submit" class="btn btn-primary mb-3">Create API Key</button>
+        </div>
+    </div>
+</EditForm>
+
+@code {
+    [Parameter]
+    public EventCallback<ApiKeyDto> OnApiKeyCreated { get; set; }
+    
+    [Inject] IApiKeyService? ApiKeyService { get; set; }
+    
+    [SupplyParameterFromForm] private CreateApiKeyCtrlInput? Model { get; set; }
+
+    protected override void OnInitialized() =>
+        Model ??= new();
+
+    private async Task CreateApiKeyAsync()
+    {
+        if (Model != null && ApiKeyService != null)
+        {
+            var result     = await ApiKeyService.CreateAsync(Model);
+            if (result.IsSuccess)
+            {
+                await OnApiKeyCreated.InvokeAsync(result.Value);
+            }
+        }
+    }
+    
+    
+
+}

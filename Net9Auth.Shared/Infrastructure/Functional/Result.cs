@@ -36,8 +36,13 @@ public class Result
     public static Result Fail(BaseResultError resultError) => new(false, resultError);
     public static Result Fail(string resultError) => new(false, new ResultError(resultError));
 
+    // ReSharper disable once NullableWarningSuppressionIsUsed
+    public static Result<T> Fail<T>(Exception exception) => new(default!, false, new ResultError(string.IsNullOrWhiteSpace(exception.Message) ? exception.GetType().Name : exception.Message));
+    
+    // ReSharper disable once NullableWarningSuppressionIsUsed
     public static Result<T> Fail<T>(BaseResultError? resultError) => new(default!, false, resultError);
-    public static Result<T> Fail<T>(string resultError) => new(default!, false, new ResultError(resultError));
+    // ReSharper disable once NullableWarningSuppressionIsUsed
+    public static Result<T> Fail<T>(string? resultError) => new(default!, false, new ResultError(resultError ?? "reason unknown"));
 
     public static Result Ok() => new(true);
 

@@ -25,7 +25,6 @@ public class ResetPasswordController(UserManager<ApplicationUser> userManager,  
             var validationResult = ValidateControllerInputModel(model, logger, nameof(ResetPassword));
             if (validationResult.IsFailure) 
                 return StatusCode(Status500InternalServerError, new ResetPasswordResponse("Error", validationResult.Error?.Message ?? "something went wrong"));
-
             
             var user = await userManager.FindByEmailAsync(model.Email);
             if (user is null)
