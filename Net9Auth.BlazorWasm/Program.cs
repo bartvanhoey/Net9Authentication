@@ -6,6 +6,7 @@ using Net9Auth.BlazorWasm;
 using Net9Auth.BlazorWasm.Services.ApiKeys;
 using Net9Auth.BlazorWasm.Services.Authentication;
 using Net9Auth.BlazorWasm.Services.Authentication.Infra;
+using Net9Auth.BlazorWasm.Services.Clipboard;
 using Net9Auth.BlazorWasm.Services.Logging;
 
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
@@ -35,7 +36,7 @@ builder.Services.AddHttpClient("ServerAPI",
 builder.Services.AddScoped<ISerilogService, SerilogService>();
 builder.Services.AddScoped<IApiKeyService, ApiKeyService>();
 builder.Services.RegisterAuthenticationServices();
-
+builder.Services.AddScoped<IClipboardService, ClipboardService>();
 
 
 await builder.Build().RunAsync();

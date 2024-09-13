@@ -9,44 +9,38 @@
             <button type="submit" class="btn btn-primary mb-3">Create API Key</button>
         </div>
         <div class="col-auto">
-            <label for="purposeSelect" class="visually-hidden">Password</label>
-            <select class="form-select" id="purposeSelect" @bind-Value="Model!.Purpose">
-                <option selected disabled value="exception-logging">Select Purpose</option>
+            <label for="purpose" class="visually-hidden">Purpose</label>
+            <input type="text" readonly class="form-control-plaintext" id="purpose" value="Select a purpose">
+        </div>
+        <div class="col-auto">
+            <select class="form-select" id="purposeSelect" @bind="Model!.Purpose">
                 <option value="exception-logging">Exception Logging</option>
                 <option value="another-purpose">Another Purpose</option>
             </select>
         </div>
         <div class="col-auto">
             <label for="purpose" class="visually-hidden">Email</label>
-            <input type="text" readonly class="form-control-plaintext" id="purpose" value="Purpose">
+            <input type="text" readonly class="form-control-plaintext" id="email" value="Email">
         </div>
-        
     </div>
 </EditForm>
 
-@code {
-    [Parameter]
-    public EventCallback<ApiKeyDto> OnApiKeyCreated { get; set; }
-    
-    [Inject] IApiKeyService? ApiKeyService { get; set; }
-    
-    [SupplyParameterFromForm] private CreateApiKeyCtrlInput? Model { get; set; }
 
-    protected override void OnInitialized() =>
-        Model ??= new();
-
-    private async Task CreateApiKeyAsync()
-    {
-        if (Model != null && ApiKeyService != null)
-        {
-            var result     = await ApiKeyService.CreateAsync(Model);
-            if (result.IsSuccess)
-            {
-                await OnApiKeyCreated.InvokeAsync(result.Value);
-            }
-        }
-    }
+@if (ApiKey != null)
+{
+    <div class="row g-3">
+        <div class="col-auto">
+            <button class="btn btn-primary mb-3" @onclick="CopyApiKey">Copy API Key</button>
+        </div>
+        <div class="col-auto">
+            <label for="apiKey" class="visually-hidden">ApiKey</label>
+            <textarea name="apiKey" id="apiKey" cols="84" rows="1" @bind="ApiKey"></textarea>
+        </div>
+    </div>
     
-    
-
 }
+
+
+
+
+

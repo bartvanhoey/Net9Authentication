@@ -50,7 +50,6 @@ public partial class ApiKeys : ComponentBase
 
     private async Task ApiKeyCreated_Handler(ApiKeyDto apiKeyDto)
     {
-        Message = "ApiKey Created";
         ApiKey = apiKeyDto.Key;
         
         await LoadGridItemsAsync();
