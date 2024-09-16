@@ -12,7 +12,7 @@ public class ExceptionLogService(IHttpClientFactory clientFactory) : IExceptionL
 {
     private readonly HttpClient _http = clientFactory.CreateClient("ServerAPI");
     
-    public Task<Result<ExceptionLogDto?>> CreateAsync(CreateExceptionLogCtrlInput input)
+    public Task<Result<ExceptionLogDto?>> CreateAsync(CreateExceptionLogDto input)
     {
         throw new NotImplementedException();
     }
@@ -21,12 +21,12 @@ public class ExceptionLogService(IHttpClientFactory clientFactory) : IExceptionL
     {
         try
         {
-            var response = await _http.PostAsJsonAsync("api/api-key", input);
+            var response = await _http.PostAsJsonAsync("api/exception-log", input);
             return Ok(await response.Content.ReadFromJsonAsync<PagedResultDto<ExceptionLogDto>>());
         }
         catch (Exception exception)
         {
-            return Fail<PagedResultDto<ExceptionLogDto>?>(new BasicResultError(""));
+            return Fail<PagedResultDto<ExceptionLogDto>?>(exception);
         }
     }
 

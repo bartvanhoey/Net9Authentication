@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Net9Auth.BlazorWasm;
+using Net9Auth.BlazorWasm.Services.Administration.AggregatedLogging.ExceptionLogging;
 using Net9Auth.BlazorWasm.Services.Administration.ApiKeys;
 using Net9Auth.BlazorWasm.Services.Authentication;
 using Net9Auth.BlazorWasm.Services.Authentication.Infra;
@@ -34,9 +35,10 @@ builder.Services.AddHttpClient("ServerAPI",
     .AddHttpMessageHandler<CustomAuthenticationHandler>();
 
 builder.Services.AddScoped<ISerilogService, SerilogService>();
-builder.Services.AddScoped<IApiKeyService, ApiKeyService>();
 builder.Services.RegisterAuthenticationServices();
 builder.Services.AddScoped<IClipboardService, ClipboardService>();
+builder.Services.AddScoped<IApiKeyService, ApiKeyService>();
+builder.Services.AddScoped<IExceptionLogService, ExceptionLogService>();
 
 
 await builder.Build().RunAsync();

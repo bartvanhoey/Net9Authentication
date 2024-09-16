@@ -24,9 +24,8 @@ public class ExceptionLogController : CustomControllerBase
 
     [HttpPost("create")]
     [DynamicApiKeyExceptionLogAuthorizationFilter]
-    public async Task<CreateExceptionLogCtrlResult> CreateExceptionLogAsync(CreateExceptionLogCtrlInput input)
+    public async Task<CreateExceptionLogCtrlResult> CreateExceptionLogAsync(CreateExceptionLogDto dto)
     {
-        var dto = _mapper.Map<CreateExceptionLogCtrlInput, CreateExceptionLogDto>(input);
         var result = await _svc.CreateAsync(dto);
         return result.IsSuccess ? new CreateExceptionLogCtrlResult(result.Value) : new CreateExceptionLogCtrlResult(result.Error?.Message);
     }

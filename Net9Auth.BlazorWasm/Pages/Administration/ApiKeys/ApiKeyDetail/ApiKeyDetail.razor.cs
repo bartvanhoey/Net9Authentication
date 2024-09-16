@@ -2,7 +2,7 @@
 using Net9Auth.BlazorWasm.Services.Administration.ApiKeys;
 using Net9Auth.Shared.Models.ApiKeys;
 
-namespace Net9Auth.BlazorWasm.Pages.ApiKeys.ApiKeyDetail;
+namespace Net9Auth.BlazorWasm.Pages.Administration.ApiKeys.ApiKeyDetail;
 
 public partial class ApiKeyDetail : ComponentBase
 {

@@ -8,8 +8,10 @@ public class ExceptionLogMappingProfile : Profile
 {
     public ExceptionLogMappingProfile()
     {
-        CreateMap<CreateExceptionLogCtrlInput, CreateExceptionLogDto>();
-        CreateMap<CreateExceptionLogDto, ExceptionLog>();
+        
+        CreateMap<CreateExceptionLogDto, ExceptionLog>()
+            .ForMember(src => src.ExceptionFrequency, x => x.MapFrom(dest => 1))
+            .ForMember(src => src.InsertTime, x => x.MapFrom(dest => DateTime.UtcNow));
         
         CreateMap<GetExceptionLogListCtrlInput, GetExceptionLogListDto>();
         

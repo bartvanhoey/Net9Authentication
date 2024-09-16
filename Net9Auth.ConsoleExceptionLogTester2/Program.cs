@@ -9,7 +9,7 @@ using static System.Console;
 
 
 const string apiEndpoint = "https://localhost:7247/";
-const string apiKey = "816760B207FD548812669BBFB30CA479CF71AEC531CEA5C7EE6F4C0117B5FD880B1840FE5BE138488BBC6E95FD0BA47A23D812F70DB4A342FA10AC05568EEC65";
+const string apiKey = "7905CEDC79A19B494CFC48AFC20782FD9CF771DD66379661642CA5A6AD4EF8E1BEE94F3B78770624831F9283A3B2BF3BC08633B60A9428409925732338213D8D";
 
 var random = new Random();
 
@@ -31,7 +31,7 @@ while (true)
     catch (Exception exception)
     {
         WriteLine($"ConsoleLogTester2-{exception.GetType().Name}");
-        var createExceptionLogDto = new CreateExceptionLogCtrlInput
+        var createExceptionLogDto = new CreateExceptionLogDto
         {
             ApplicationName = "ConsoleExceptionLogTester2",
             ExceptionType = exception.GetType().Name,

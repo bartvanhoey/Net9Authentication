@@ -32,7 +32,8 @@ public class ExceptionLogApiService : IExceptionLogApiService
         {
             var exceptionLogs = await _db.ExceptionLogs.Skip(dto.SkipCount).Take(dto.MaxResultCount).ToListAsync();
             var exceptionLogDtos = _mapper.Map<List<ExceptionLog>, List<ExceptionLogDto>>(exceptionLogs);
-            return Ok(new PagedResultDto<ExceptionLogDto>(exceptionLogs.Count, exceptionLogDtos.OrderByDescending(x => x.CreatedAt).ToList()));
+            return Ok(new PagedResultDto<ExceptionLogDto>(exceptionLogs.Count,
+                exceptionLogDtos.OrderByDescending(x => x.InsertTime).ToList()));
         }
         catch (Exception exception)
         {
@@ -44,20 +45,22 @@ public class ExceptionLogApiService : IExceptionLogApiService
     {
         try
         {
-            var aggregatedLog = _mapper.Map<CreateExceptionLogDto, ExceptionLog>(createDto);
-            aggregatedLog.InsertTime = DateTime.UtcNow;
-            var dbEntity = await _db.ExceptionLogs.AddAsync(aggregatedLog);
+            var exceptionLog = _mapper.Map<CreateExceptionLogDto, ExceptionLog>(createDto);
+            var frequency = await exceptionLog.SetFrequency(_db);
+
+            await exceptionLog.RemoveSameExceptionLogsKeepLastAsync(_db, frequency, 20);
+ 
+            var dbEntity = await _db.ExceptionLogs.AddAsync(exceptionLog);
+            
             await _db.SaveChangesAsync();
-            var aggregatedLogDto = _mapper.Map<ExceptionLog, ExceptionLogDto>(dbEntity.Entity);
-            return Ok(aggregatedLogDto);
+            return Ok(_mapper.Map<ExceptionLog, ExceptionLogDto>(dbEntity.Entity));
         }
         catch (Exception exception)
         {
-            return Fail<ExceptionLogDto>(new BasicResultError(exception.Message));
+            return Fail<ExceptionLogDto>(exception);
         }
     }
 
-    
 
     public Task<Result> UpdateAsync(Guid id, UpdateExceptionLogDto dto)
     {

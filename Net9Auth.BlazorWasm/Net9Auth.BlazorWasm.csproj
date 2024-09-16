@@ -43,6 +43,10 @@
 
   <ItemGroup>
     <AdditionalFiles Include="Pages\Account\Manage\Profile\Profile.razor" />
+    <AdditionalFiles Include="Pages\Administration\AggregatedLogging\ExceptionLogging.razor" />
+    <AdditionalFiles Include="Pages\Administration\ApiKeys\AddApiKey.razor" />
+    <AdditionalFiles Include="Pages\Administration\ApiKeys\ApiKeyDetail\ApiKeyDetail.razor" />
+    <AdditionalFiles Include="Pages\Administration\ApiKeys\ApiKeys.razor" />
   </ItemGroup>
 
 </Project>

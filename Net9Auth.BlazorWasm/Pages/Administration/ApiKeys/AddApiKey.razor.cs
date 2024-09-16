@@ -3,7 +3,7 @@ using Net9Auth.BlazorWasm.Services.Administration.ApiKeys;
 using Net9Auth.BlazorWasm.Services.Clipboard;
 using Net9Auth.Shared.Models.ApiKeys;
 
-namespace Net9Auth.BlazorWasm.Pages.ApiKeys;
+namespace Net9Auth.BlazorWasm.Pages.Administration.ApiKeys;
 
 public partial class AddApiKey : ComponentBase
 {

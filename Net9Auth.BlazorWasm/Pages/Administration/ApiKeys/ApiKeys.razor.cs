@@ -9,7 +9,7 @@ using static Net9Auth.Shared.Infrastructure.Functional.Errors.ResultErrorFactory
 using static Net9Auth.Shared.Infrastructure.Functional.Result;
 
 
-namespace Net9Auth.BlazorWasm.Pages.ApiKeys;
+namespace Net9Auth.BlazorWasm.Pages.Administration.ApiKeys;
 
 public partial class ApiKeys : ComponentBase
 {
