@@ -45,8 +45,4 @@
     <AdditionalFiles Include="Pages\Account\Manage\Profile\Profile.razor" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Services\AggregatedLogging\ExceptionLogging\" />
-  </ItemGroup>
-
 </Project>

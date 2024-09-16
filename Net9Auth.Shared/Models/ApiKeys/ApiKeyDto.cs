@@ -5,6 +5,9 @@ public class ApiKeyDto
     public Guid Id { get; set; }
     public required string Key { get; set; }
     public required string Purpose { get; set; }
+    public required string ApplicationName { get; set; }
+    public string? InternalCompany { get; set; }
+    public string? ExternalCompany { get; set; }
     public required DateTime CreatedAt { get; set; }
     public required string CreatedBy { get; set; }
     public DateTime? ExpiryDate { get; set; }

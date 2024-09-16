@@ -1,16 +1,19 @@
-﻿@using Net9Auth.BlazorWasm.Services.ApiKeys
-@using Net9Auth.Shared.Models.ApiKeys
+﻿@using Net9Auth.Shared.Models.ApiKeys
+
+
 <EditForm Model="Model" OnValidSubmit="CreateApiKeyAsync" FormName="Starship3">
     <DataAnnotationsValidator/>
     <ValidationSummary/>
 
-    <div class="row g-3">
+    <div class="row g-3 mb-3">
         <div class="col-auto">
-            <button type="submit" class="btn btn-primary mb-3">Create API Key</button>
+            <button type="submit" class="btn btn-primary w150px">Create API Key</button>
         </div>
+
+        @* Purpose *@
         <div class="col-auto">
             <label for="purpose" class="visually-hidden">Purpose</label>
-            <input type="text" readonly class="form-control-plaintext" id="purpose" value="Select a purpose">
+            <input type="text" readonly class="form-control-plaintext text-end" id="purpose" value="Select a purpose">
         </div>
         <div class="col-auto">
             <select class="form-select" id="purposeSelect" @bind="Model!.Purpose">
@@ -18,11 +21,26 @@
                 <option value="another-purpose">Another Purpose</option>
             </select>
         </div>
+
+        @* Application Name *@
         <div class="col-auto">
-            <label for="purpose" class="visually-hidden">Email</label>
-            <input type="text" readonly class="form-control-plaintext" id="email" value="Email">
+            <InputText class="form-control-plaintext ps-2" id="applicationName" @bind-Value="@Model.ApplicationName" placeholder="Application Name"></InputText>
+        </div>
+    
+        @* Internal Company *@
+        <div class="col-auto">
+            <label for="internalCompany" class="visually-hidden">Internal Company</label>
+            <InputText class="form-control-plaintext ps-2" id="internalCompany" @bind-Value="@Model.InternalCompany" placeholder="Internal Company"></InputText>
+        </div>
+        
+        @* External Company *@
+        <div class="col-auto">
+            <label for="externalCompany" class="visually-hidden">Internal Company</label>
+            <InputText class="form-control-plaintext ps-2" id="externalCompany" @bind-Value="@Model.ExternalCompany" placeholder="External Company"></InputText>
         </div>
     </div>
+
+
 </EditForm>
 
 
@@ -30,17 +48,11 @@
 {
     <div class="row g-3">
         <div class="col-auto">
-            <button class="btn btn-primary mb-3" @onclick="CopyApiKey">Copy API Key</button>
+            <button class="btn btn-primary w150px mb-5" @onclick="CopyApiKey">Copy API Key</button>
         </div>
         <div class="col-auto">
             <label for="apiKey" class="visually-hidden">ApiKey</label>
-            <textarea name="apiKey" id="apiKey" cols="84" rows="1" @bind="ApiKey"></textarea>
+            <input name="apiKey" disabled class="form-control-plaintext px-1 w1300px" id="apiKey"  @bind="ApiKey"/>
         </div>
     </div>
-    
 }
-
-
-
-
-

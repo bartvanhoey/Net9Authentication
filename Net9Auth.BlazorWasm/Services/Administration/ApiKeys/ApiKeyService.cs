@@ -1,6 +1,4 @@
 ﻿using System.Net.Http.Json;
-using System.Runtime.CompilerServices;
-using Net9Auth.Shared.Infrastructure.Extensions;
 using Net9Auth.Shared.Infrastructure.Functional;
 using Net9Auth.Shared.Infrastructure.Functional.Errors;
 using Net9Auth.Shared.Infrastructure.Models;
@@ -8,7 +6,7 @@ using Net9Auth.Shared.Models.ApiKeys;
 using static Net9Auth.Shared.Infrastructure.Functional.Errors.ResultErrorFactory;
 using static Net9Auth.Shared.Infrastructure.Functional.Result;
 
-namespace Net9Auth.BlazorWasm.Services.ApiKeys;
+namespace Net9Auth.BlazorWasm.Services.Administration.ApiKeys;
 
 public class ApiKeyService(IHttpClientFactory clientFactory) : IApiKeyService
 {
@@ -46,7 +44,7 @@ public class ApiKeyService(IHttpClientFactory clientFactory) : IApiKeyService
         }
         catch (Exception exception)
         {
-            return Fail<PagedResultDto<ApiKeyDto>?>(new BasicResultError(""));
+            return Fail<PagedResultDto<ApiKeyDto>?>(exception);
         }
     }
 

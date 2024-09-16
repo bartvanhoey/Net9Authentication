@@ -32,7 +32,7 @@ while (true)
     catch (Exception exception)
     {
         WriteLine($"ConsoleLogTester1-{exception.GetType().Name}");
-        var createExceptionLogDto = new CreateExceptionLogDto
+        var createExceptionLogDto = new CreateExceptionLogCtrlInput
         {
             ApplicationName = "ConsoleExceptionLogTester1",
             ExceptionType = exception.GetType().Name,

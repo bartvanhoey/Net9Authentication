@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using Net9Auth.API.Controllers.ApiKeys;
 using Net9Auth.API.Models.ApiKeys;
 using Net9Auth.Shared.Models.ApiKeys;
 

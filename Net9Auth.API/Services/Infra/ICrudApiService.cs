@@ -8,7 +8,7 @@ public interface ICrudApiService<T, in TC, in TU, in TL>
 {
     Task<Result<T>> GetAsync(Guid id);
     
-    Task<Result<PagedResultDto<T>>> GetListAsync(TL input);
+    Task<Result<PagedResultDto<T>>> GetListAsync(TL dto);
     
     Task<Result<T>> CreateAsync(TC createDto);
     

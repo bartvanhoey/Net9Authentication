@@ -6,7 +6,7 @@ using Net9Auth.API.Services.ApiKeyService;
 using Net9Auth.Shared.Infrastructure.Models;
 using Net9Auth.Shared.Models.ApiKeys;
 
-namespace Net9Auth.API.Controllers.ApiKeys;
+namespace Net9Auth.API.Controllers.Administration.ApiKeys;
 
 [Authorize(Roles = "Admin")]
 [ApiController]
@@ -32,7 +32,9 @@ public class ApiKeyController : CustomControllerBase
         createApiKeyDto.CreatedBy = emailAddressResult.Value;
 
         var result = await _svc.CreateAsync(createApiKeyDto);
-        return result.IsSuccess ? new CreateApiKeyCtrlResult(result.Value) : new CreateApiKeyCtrlResult(null, result.Error?.Message);
+        return result.IsSuccess
+            ? new CreateApiKeyCtrlResult(result.Value)
+            : new CreateApiKeyCtrlResult(null, result.Error?.Message);
     }
 
     [HttpPut("update")]
@@ -58,6 +60,8 @@ public class ApiKeyController : CustomControllerBase
     {
         var getApiKeyDto = _mapper.Map<GetApiKeyCtrlInput, GetApiKeyDto>(input);
         var result = await _svc.GetAsync(getApiKeyDto.Id);
-        return result.IsSuccess ? new GetApiKeyByIdResultDto(result.Value) : new GetApiKeyByIdResultDto(result.Error?.Message);
+        return result.IsSuccess
+            ? new GetApiKeyByIdResultDto(result.Value)
+            : new GetApiKeyByIdResultDto(result.Error?.Message);
     }
 }

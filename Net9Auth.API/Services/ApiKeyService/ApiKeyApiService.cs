@@ -39,14 +39,14 @@ public class ApiKeyApiService : IApiKeyApiService
         }
     }
 
-    public async Task<Result<PagedResultDto<ApiKeyDto>>> GetListAsync(GetApiKeyListDto input)
+    public async Task<Result<PagedResultDto<ApiKeyDto>>> GetListAsync(GetApiKeyListDto dto)
     {
         try
         {
-            var apiKeys = input.Purpose.IsNullOrWhiteSpace()
-                ? await _db.ApiKeys.Skip(input.SkipCount).Take(input.MaxResultCount).ToListAsync()
-                : await _db.ApiKeys.Where(x => x.Purpose == input.Purpose).Skip(input.SkipCount)
-                    .Take(input.MaxResultCount).ToListAsync();
+            var apiKeys = dto.Purpose.IsNullOrWhiteSpace()
+                ? await _db.ApiKeys.Skip(dto.SkipCount).Take(dto.MaxResultCount).ToListAsync()
+                : await _db.ApiKeys.Where(x => x.Purpose == dto.Purpose).Skip(dto.SkipCount)
+                    .Take(dto.MaxResultCount).ToListAsync();
 
             var apiKeyDtos = _mapper.Map<List<ApiKey>, List<ApiKeyDto>>(apiKeys);
             return Ok(new PagedResultDto<ApiKeyDto>(apiKeys.Count, apiKeyDtos.OrderByDescending(x => x.CreatedAt).ToList()));

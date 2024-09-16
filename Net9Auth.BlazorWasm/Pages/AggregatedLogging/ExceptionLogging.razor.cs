@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.QuickGrid;
-using Net9Auth.BlazorWasm.Services.ApiKeys;
 using Net9Auth.Shared.Infrastructure.Functional;
 using Net9Auth.Shared.Infrastructure.Models;
 using Net9Auth.Shared.Models.ApiKeys;

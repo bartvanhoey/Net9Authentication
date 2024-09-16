@@ -2,7 +2,7 @@
 using Net9Auth.Shared.Infrastructure.Models;
 using Net9Auth.Shared.Models.ApiKeys;
 
-namespace Net9Auth.BlazorWasm.Services.ApiKeys;
+namespace Net9Auth.BlazorWasm.Services.Administration.ApiKeys;
 
 public interface IApiKeyService
 {

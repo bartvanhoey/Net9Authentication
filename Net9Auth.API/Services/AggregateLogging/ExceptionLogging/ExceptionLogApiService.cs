@@ -1,4 +1,5 @@
 using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using Net9Auth.API.Database;
 using Net9Auth.API.Models.AggregatedLogging.ExceptionLogging;
 using Net9Auth.Shared.Infrastructure.Functional;
@@ -9,12 +10,12 @@ using static Net9Auth.Shared.Infrastructure.Functional.Result;
 
 namespace Net9Auth.API.Services.AggregateLogging.ExceptionLogging;
 
-public class ExceptionLogService : IExceptionLogService
+public class ExceptionLogApiService : IExceptionLogApiService
 {
     private readonly ApplicationDbContext _db;
     private readonly IMapper _mapper;
 
-    public ExceptionLogService(ApplicationDbContext db, IMapper mapper)
+    public ExceptionLogApiService(ApplicationDbContext db, IMapper mapper)
     {
         _db = db;
         _mapper = mapper;
@@ -25,16 +26,24 @@ public class ExceptionLogService : IExceptionLogService
         throw new NotImplementedException();
     }
 
-    public Task<Result<PagedResultDto<ExceptionLogDto>>> GetListAsync(GetExceptionLogListDto input)
+    public async Task<Result<PagedResultDto<ExceptionLogDto>>> GetListAsync(GetExceptionLogListDto dto)
     {
-        throw new NotImplementedException();
+        try
+        {
+            var exceptionLogs = await _db.ExceptionLogs.Skip(dto.SkipCount).Take(dto.MaxResultCount).ToListAsync();
+            var exceptionLogDtos = _mapper.Map<List<ExceptionLog>, List<ExceptionLogDto>>(exceptionLogs);
+            return Ok(new PagedResultDto<ExceptionLogDto>(exceptionLogs.Count, exceptionLogDtos.OrderByDescending(x => x.CreatedAt).ToList()));
+        }
+        catch (Exception exception)
+        {
+            return Fail<PagedResultDto<ExceptionLogDto>>(new BasicResultError(exception.Message));
+        }
     }
 
     public async Task<Result<ExceptionLogDto>> CreateAsync(CreateExceptionLogDto createDto)
     {
         try
         {
-            
             var aggregatedLog = _mapper.Map<CreateExceptionLogDto, ExceptionLog>(createDto);
             aggregatedLog.InsertTime = DateTime.UtcNow;
             var dbEntity = await _db.ExceptionLogs.AddAsync(aggregatedLog);
@@ -48,7 +57,9 @@ public class ExceptionLogService : IExceptionLogService
         }
     }
 
-    public Task<Result> UpdateAsync(Guid id, UpdateExceptionLogDto input)
+    
+
+    public Task<Result> UpdateAsync(Guid id, UpdateExceptionLogDto dto)
     {
         throw new NotImplementedException();
     }

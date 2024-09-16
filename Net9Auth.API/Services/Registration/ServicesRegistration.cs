@@ -8,7 +8,7 @@ public static class ServicesRegistration
     public static void RegisterServices(this WebApplicationBuilder builder)
     {
         builder.Services.AddScoped<IApiKeyApiService, ApiKeyApiService>();
-        builder.Services.AddScoped<IExceptionLogService, ExceptionLogService>();
+        builder.Services.AddScoped<IExceptionLogApiService, ExceptionLogApiService>();
 
 
 

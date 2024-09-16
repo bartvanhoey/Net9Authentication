@@ -8,7 +8,12 @@ public class ExceptionLogMappingProfile : Profile
 {
     public ExceptionLogMappingProfile()
     {
+        CreateMap<CreateExceptionLogCtrlInput, CreateExceptionLogDto>();
         CreateMap<CreateExceptionLogDto, ExceptionLog>();
+        
+        CreateMap<GetExceptionLogListCtrlInput, GetExceptionLogListDto>();
+        
+        
         CreateMap<ExceptionLog, ExceptionLogDto>();
     }
 }

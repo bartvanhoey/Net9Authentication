@@ -23,6 +23,9 @@
             <button class="btn btn-primary" @onclick="@(() => CopyToClipboard(context))">Copy</button>
         </TemplateColumn>
         <PropertyColumn Property="@(p => p.Purpose)" Sortable="true"/>
+        <PropertyColumn Property="@(p => p.ApplicationName)" Sortable="true"/>
+        <PropertyColumn Property="@(p => p.InternalCompany)" Sortable="true"/>
+        <PropertyColumn Property="@(p => p.ExternalCompany)" Sortable="true"/>
         <PropertyColumn Property="@(p => p.CreatedAt)" Sortable="true"/>
         <PropertyColumn Property="@(p => p.IsRevoked)" Sortable="true"/>
         <PropertyColumn Property="@(p => p.IsDeleted)" Sortable="true"/>

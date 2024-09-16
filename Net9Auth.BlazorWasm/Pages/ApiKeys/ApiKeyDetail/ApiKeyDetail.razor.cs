@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
-using Net9Auth.BlazorWasm.Services.ApiKeys;
+using Net9Auth.BlazorWasm.Services.Administration.ApiKeys;
 using Net9Auth.Shared.Models.ApiKeys;
 
 namespace Net9Auth.BlazorWasm.Pages.ApiKeys.ApiKeyDetail;
