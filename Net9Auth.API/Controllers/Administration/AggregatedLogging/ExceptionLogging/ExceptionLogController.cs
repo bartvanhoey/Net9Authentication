@@ -31,10 +31,10 @@ public class ExceptionLogController : CustomControllerBase
     }
     
     [HttpPost]
-    public async Task<PagedResultDto<ExceptionLogDto>> GetExceptionLogs(GetExceptionLogListCtrlInput input)
+    public async Task<PagedResultDto<ExceptionLogDto>> GetExceptionLogs(GetExceptionLogListDto dto)
     {
-        var getExceptionLogListDto = _mapper.Map<GetExceptionLogListCtrlInput, GetExceptionLogListDto>(input);
-        var result = await _svc.GetListAsync(getExceptionLogListDto);
+        
+        var result = await _svc.GetListAsync(dto);
         return result.Value;
     }
 }

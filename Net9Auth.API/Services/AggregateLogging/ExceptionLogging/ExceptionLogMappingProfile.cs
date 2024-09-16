@@ -13,7 +13,7 @@ public class ExceptionLogMappingProfile : Profile
             .ForMember(src => src.ExceptionFrequency, x => x.MapFrom(dest => 1))
             .ForMember(src => src.InsertTime, x => x.MapFrom(dest => DateTime.UtcNow));
         
-        CreateMap<GetExceptionLogListCtrlInput, GetExceptionLogListDto>();
+        
         
         
         CreateMap<ExceptionLog, ExceptionLogDto>();

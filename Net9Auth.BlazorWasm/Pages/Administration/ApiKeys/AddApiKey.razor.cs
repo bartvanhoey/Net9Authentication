@@ -11,7 +11,7 @@ public partial class AddApiKey : ComponentBase
     [Inject] IApiKeyService? ApiKeyService { get; set; }
     [Inject] IClipboardService? ClipboardService { get; set; }
 
-    [SupplyParameterFromForm] private CreateApiKeyCtrlInput? Model { get; set; }
+    [SupplyParameterFromForm] private CreateApiKeyDto? Model { get; set; }
 
     public string? ApiKey { get; set; }
 

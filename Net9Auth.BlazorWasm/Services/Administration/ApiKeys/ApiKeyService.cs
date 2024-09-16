@@ -13,7 +13,7 @@ public class ApiKeyService(IHttpClientFactory clientFactory) : IApiKeyService
     private readonly HttpClient _http = clientFactory.CreateClient("ServerAPI");
    
     
-    public async Task<Result<ApiKeyDto?>> CreateAsync(CreateApiKeyCtrlInput input)
+    public async Task<Result<ApiKeyDto?>> CreateAsync(CreateApiKeyDto input)
     {
         try
         {
@@ -30,16 +30,16 @@ public class ApiKeyService(IHttpClientFactory clientFactory) : IApiKeyService
         }
     }
 
-    public Task<Result> UpdateAsync(Guid id, UpdateApiKeyCtrlInput input)
+    public Task<Result> UpdateAsync(Guid id, UpdateApiKeyDto input)
     {
         throw new NotImplementedException();
     }
 
-    public async Task<Result<PagedResultDto<ApiKeyDto>?>> GetListAsync(GetApiKeyListCtrlInput input)
+    public async Task<Result<PagedResultDto<ApiKeyDto>?>> GetListAsync(GetApiKeyListDto dto)
     {
         try
         {
-            var response = await _http.PostAsJsonAsync("api/api-key", input);
+            var response = await _http.PostAsJsonAsync("api/api-key", dto);
             return Ok(await response.Content.ReadFromJsonAsync<PagedResultDto<ApiKeyDto>>());
         }
         catch (Exception exception)
@@ -53,7 +53,7 @@ public class ApiKeyService(IHttpClientFactory clientFactory) : IApiKeyService
         throw new NotImplementedException();
     }
 
-    public Task<Result> RevokeAsync(RevokeApiKeyCtrlInput input)
+    public Task<Result> RevokeAsync(RevokeApiKeyDto input)
     {
         throw new NotImplementedException();
     }
@@ -62,7 +62,7 @@ public class ApiKeyService(IHttpClientFactory clientFactory) : IApiKeyService
     {
         try
         {
-            var response = await _http.PostAsJsonAsync("api/api-key/by-id", new GetApiKeyCtrlInput {Id = id});
+            var response = await _http.PostAsJsonAsync("api/api-key/by-id", new GetApiKeyDto {Id = id});
             var result = await response.Content.ReadFromJsonAsync<GetApiKeyByIdResultDto>();
             if (result == null) Fail<ApiKeyDto?>(ResponseIsNull());
             return result is { IsSuccess: true } ? Ok(result.ApiKeyDto) : Fail<ApiKeyDto?>(BasicError(result?.ErrorMessage ?? ""));

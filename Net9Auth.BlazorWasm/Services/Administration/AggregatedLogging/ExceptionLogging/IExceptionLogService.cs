@@ -6,8 +6,8 @@ namespace Net9Auth.BlazorWasm.Services.Administration.AggregatedLogging.Exceptio
 
 public interface IExceptionLogService
 {
-    Task<Result<ExceptionLogDto?>> CreateAsync(CreateExceptionLogDto input);
-    Task<Result<PagedResultDto<ExceptionLogDto>?>> GetListAsync(GetExceptionLogListCtrlInput input);
+    Task<Result<ExceptionLogDto?>> CreateAsync(CreateExceptionLogDto dto);
+    Task<Result<PagedResultDto<ExceptionLogDto>?>> GetListAsync(GetExceptionLogListDto dto);
     Task<Result> DeleteAsync(Guid id);
     Task<Result<ExceptionLogDto?>> GetAsync(Guid id);
 }

@@ -63,7 +63,7 @@ public partial class ExceptionLogging : ComponentBase
         if (ExceptionLogService == null) ret = Result.Fail<PagedResultDto<ExceptionLogDto>?>(ResultErrorFactory.ApiServiceIsNull(""));
         else
         {
-            var getListResult = await ExceptionLogService.GetListAsync(new GetExceptionLogListCtrlInput());
+            var getListResult = await ExceptionLogService.GetListAsync(new GetExceptionLogListDto());
             ret = getListResult.IsSuccess ? getListResult : Result.Fail<PagedResultDto<ExceptionLogDto>?>(getListResult.Error);
         }
 

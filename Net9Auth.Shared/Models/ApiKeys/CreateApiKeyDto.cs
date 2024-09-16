@@ -1,11 +1,12 @@
+﻿using System.ComponentModel.DataAnnotations;
+
 namespace Net9Auth.Shared.Models.ApiKeys;
 
 public class CreateApiKeyDto
 {
-    public string Purpose { get; set; } = "";
-    public string CreatedBy { get; set; } = "";
-
-    public required string ApplicationName { get; set; }
-    public string? InternalCompany { get; set; }
-    public string? ExternalCompany { get; set; }
+    [Required] public string Purpose { get; set; } = "";
+    [Required] [StringLength(50)] public string ApplicationName { get; set; } = "";
+    [StringLength(50)] public string? InternalCompany { get; set; }
+    [StringLength(50)] public string? ExternalCompany { get; set; }
+    [EmailAddress] public string? CreatedBy { get; set; }
 }

@@ -17,11 +17,11 @@ public class ExceptionLogService(IHttpClientFactory clientFactory) : IExceptionL
         throw new NotImplementedException();
     }
 
-    public async Task<Result<PagedResultDto<ExceptionLogDto>?>> GetListAsync(GetExceptionLogListCtrlInput input)
+    public async Task<Result<PagedResultDto<ExceptionLogDto>?>> GetListAsync(GetExceptionLogListDto dto)
     {
         try
         {
-            var response = await _http.PostAsJsonAsync("api/exception-log", input);
+            var response = await _http.PostAsJsonAsync("api/exception-log", dto);
             return Ok(await response.Content.ReadFromJsonAsync<PagedResultDto<ExceptionLogDto>>());
         }
         catch (Exception exception)

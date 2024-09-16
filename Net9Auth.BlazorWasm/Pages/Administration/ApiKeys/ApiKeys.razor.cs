@@ -62,7 +62,7 @@ public partial class ApiKeys : ComponentBase
         if (ApiKeyService == null) ret = Fail<PagedResultDto<ApiKeyDto>?>(ApiServiceIsNull(""));
         else
         {
-            var getListResult = await ApiKeyService.GetListAsync(new GetApiKeyListCtrlInput());
+            var getListResult = await ApiKeyService.GetListAsync(new GetApiKeyListDto());
             ret = getListResult.IsSuccess ? getListResult : Fail<PagedResultDto<ApiKeyDto>?>(getListResult.Error);
         }
 

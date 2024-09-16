@@ -6,11 +6,11 @@ namespace Net9Auth.BlazorWasm.Services.Administration.ApiKeys;
 
 public interface IApiKeyService
 {
-    Task<Result<ApiKeyDto?>> CreateAsync(CreateApiKeyCtrlInput input);
-    Task<Result> UpdateAsync(Guid id, UpdateApiKeyCtrlInput input);
-    Task<Result<PagedResultDto<ApiKeyDto>?>> GetListAsync(GetApiKeyListCtrlInput input);
+    Task<Result<ApiKeyDto?>> CreateAsync(CreateApiKeyDto input);
+    Task<Result> UpdateAsync(Guid id, UpdateApiKeyDto input);
+    Task<Result<PagedResultDto<ApiKeyDto>?>> GetListAsync(GetApiKeyListDto dto);
     Task<Result> DeleteAsync(Guid id);
-    Task<Result> RevokeAsync(RevokeApiKeyCtrlInput input);
+    Task<Result> RevokeAsync(RevokeApiKeyDto input);
     Task<Result<ApiKeyDto?>> GetAsync(Guid id);
     
 }

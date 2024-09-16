@@ -23,12 +23,12 @@ public class ApiKeyController : CustomControllerBase
     }
 
     [HttpPost("create")]
-    public async Task<CreateApiKeyCtrlResult> CreateApiKeyAsync(CreateApiKeyCtrlInput input)
+    public async Task<CreateApiKeyCtrlResult> CreateApiKeyAsync(CreateApiKeyDto input)
     {
         var emailAddressResult = Request.GetEmailAddress();
         if (emailAddressResult.IsFailure) return new CreateApiKeyCtrlResult(null, emailAddressResult.Error?.Message);
 
-        var createApiKeyDto = _mapper.Map<CreateApiKeyCtrlInput, CreateApiKeyDto>(input);
+        var createApiKeyDto = _mapper.Map<CreateApiKeyDto, CreateApiKeyDto>(input);
         createApiKeyDto.CreatedBy = emailAddressResult.Value;
 
         var result = await _svc.CreateAsync(createApiKeyDto);
@@ -38,28 +38,26 @@ public class ApiKeyController : CustomControllerBase
     }
 
     [HttpPut("update")]
-    public async Task<UpdateApiKeyCtrlResult> UpdateApiKeyAsync(UpdateApiKeyCtrlInput input)
+    public async Task<UpdateApiKeyCtrlResult> UpdateApiKeyAsync(UpdateApiKeyDto input)
     {
-        var updateApiKeyDto = _mapper.Map<UpdateApiKeyCtrlInput, UpdateApiKeyDto>(input);
+        var updateApiKeyDto = _mapper.Map<UpdateApiKeyDto, UpdateApiKeyDto>(input);
 
         var result = await _svc.UpdateAsync(updateApiKeyDto.Id, updateApiKeyDto);
         return result.IsSuccess ? new UpdateApiKeyCtrlResult() : new UpdateApiKeyCtrlResult(result.Error?.Message);
     }
 
     [HttpPost]
-    public async Task<PagedResultDto<ApiKeyDto>> GetApiKeys(GetApiKeyListCtrlInput input)
+    public async Task<PagedResultDto<ApiKeyDto>> GetApiKeys(GetApiKeyListDto dto)
     {
-        var getApiKeyListDto = _mapper.Map<GetApiKeyListCtrlInput, GetApiKeyListDto>(input);
-        var result = await _svc.GetListAsync(getApiKeyListDto);
+        var result = await _svc.GetListAsync(dto);
         return result.Value;
     }
 
     [HttpPost]
     [Route("by-id")]
-    public async Task<GetApiKeyByIdResultDto> GetApiKeyById(GetApiKeyCtrlInput input)
+    public async Task<GetApiKeyByIdResultDto> GetApiKeyById(GetApiKeyDto dto)
     {
-        var getApiKeyDto = _mapper.Map<GetApiKeyCtrlInput, GetApiKeyDto>(input);
-        var result = await _svc.GetAsync(getApiKeyDto.Id);
+        var result = await _svc.GetAsync(dto.Id);
         return result.IsSuccess
             ? new GetApiKeyByIdResultDto(result.Value)
             : new GetApiKeyByIdResultDto(result.Error?.Message);
