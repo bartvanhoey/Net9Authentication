@@ -9,15 +9,17 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Net9Auth.BlazorWasm", "Net9
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Net9Auth.Shared", "Net9Auth.Shared\Net9Auth.Shared.csproj", "{08ABCA17-2732-4005-9DA0-80889C24F024}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Net9Auth.Console1", "Net9Auth.Console1\Net9Auth.Console1.csproj", "{55BDF39C-6288-413E-B34E-7C6177A863BD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Net9Auth.Console1", "Net9Auth.Console1\Net9Auth.Console1.csproj", "{55BDF39C-6288-413E-B34E-7C6177A863BD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Net9Auth.Console2", "Net9Auth.Console2\Net9Auth.Console2.csproj", "{53581434-A72C-457B-823D-71BCC07508EC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Net9Auth.Console2", "Net9Auth.Console2\Net9Auth.Console2.csproj", "{53581434-A72C-457B-823D-71BCC07508EC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Net9AuthConsoleBookStore", "Net9AuthConsoleBookStore\Net9AuthConsoleBookStore.csproj", "{57BC0E25-5179-4A75-B015-A92CFDB67BB3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Net9AuthConsoleBookStore", "Net9AuthConsoleBookStore\Net9AuthConsoleBookStore.csproj", "{57BC0E25-5179-4A75-B015-A92CFDB67BB3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Net9Auth.ConsoleExceptionLogTester1", "Net9Auth.ConsoleExceptionLogTester1\Net9Auth.ConsoleExceptionLogTester1.csproj", "{146B5EF9-C3E2-43F2-B79E-27C77494D52A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Net9Auth.ConsoleExceptionLogTester1", "Net9Auth.ConsoleExceptionLogTester1\Net9Auth.ConsoleExceptionLogTester1.csproj", "{146B5EF9-C3E2-43F2-B79E-27C77494D52A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Net9Auth.ConsoleExceptionLogTester2", "Net9Auth.ConsoleExceptionLogTester2\Net9Auth.ConsoleExceptionLogTester2.csproj", "{A3D13CEE-C600-4A59-8A5E-4575FE21FD8B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Net9Auth.ConsoleExceptionLogTester2", "Net9Auth.ConsoleExceptionLogTester2\Net9Auth.ConsoleExceptionLogTester2.csproj", "{A3D13CEE-C600-4A59-8A5E-4575FE21FD8B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Net9Auth.WinForms", "Net9Auth.WinForms\Net9Auth.WinForms.csproj", "{76D6C518-E1C7-4F11-B83F-675CAE778912}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,10 +47,6 @@ Global
 		{53581434-A72C-457B-823D-71BCC07508EC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{53581434-A72C-457B-823D-71BCC07508EC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{53581434-A72C-457B-823D-71BCC07508EC}.Release|Any CPU.Build.0 = Release|Any CPU
-		{03749610-E3A4-4B6E-B576-02EDE39EC578}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{03749610-E3A4-4B6E-B576-02EDE39EC578}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{03749610-E3A4-4B6E-B576-02EDE39EC578}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{03749610-E3A4-4B6E-B576-02EDE39EC578}.Release|Any CPU.Build.0 = Release|Any CPU
 		{57BC0E25-5179-4A75-B015-A92CFDB67BB3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{57BC0E25-5179-4A75-B015-A92CFDB67BB3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{57BC0E25-5179-4A75-B015-A92CFDB67BB3}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -61,6 +59,10 @@ Global
 		{A3D13CEE-C600-4A59-8A5E-4575FE21FD8B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A3D13CEE-C600-4A59-8A5E-4575FE21FD8B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A3D13CEE-C600-4A59-8A5E-4575FE21FD8B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{76D6C518-E1C7-4F11-B83F-675CAE778912}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{76D6C518-E1C7-4F11-B83F-675CAE778912}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{76D6C518-E1C7-4F11-B83F-675CAE778912}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{76D6C518-E1C7-4F11-B83F-675CAE778912}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

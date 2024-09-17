@@ -6,10 +6,8 @@ using Net9Auth.ConsoleExceptionLogTester2;
 using Net9Auth.Shared.Models.AggregateLogging.ExceptionLogging;
 using static System.Console;
 
-
-
 const string apiEndpoint = "https://localhost:7247/";
-const string apiKey = "7905CEDC79A19B494CFC48AFC20782FD9CF771DD66379661642CA5A6AD4EF8E1BEE94F3B78770624831F9283A3B2BF3BC08633B60A9428409925732338213D8D";
+const string apiKey = "B5B751E2A51F785258718440078B7601C27ED1FE1D9953CB77D066184B18C30E8DE8312DD66AA8068C3E3709D26FF8D13CBDA63D78FB01B75944C7BE445C44CA";
 
 var random = new Random();
 
@@ -21,6 +19,7 @@ while (true)
         var exceptionType = random.Next(1, 5); // Generate a random number between 1 and 4
         throw exceptionType switch
         {
+            // ReSharper disable once NotResolvedInText
             1 => new ArgumentNullException("Example argument is null"),
             2 => new IndexOutOfRangeException("Example index is out of range"),
             3 => new InvalidOperationException("Example operation is invalid"),
@@ -30,7 +29,7 @@ while (true)
     }
     catch (Exception exception)
     {
-        WriteLine($"ConsoleLogTester2-{exception.GetType().Name}");
+        
         var createExceptionLogDto = new CreateExceptionLogDto
         {
             ApplicationName = "ConsoleExceptionLogTester2",
@@ -54,10 +53,11 @@ while (true)
                 createExceptionLogDto);
             if (response.StatusCode == HttpStatusCode.Unauthorized) WriteLine($"{Environment.NewLine}ApiKey {apiKey} is Unauthorized{Environment.NewLine}");
             response.EnsureSuccessStatusCode();
+            WriteLine($"{exception.GetType().Name} sent to API from ConsoleLogTester2");
         }
         catch (Exception ex)
         {
-            WriteLine(ex.Message);
+            WriteLine($"{ex.GetType().Name}: Could NOT send {exception.GetType().Name} to API fromConsoleLogTester2");
         }
     }
 }
