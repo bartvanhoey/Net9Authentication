@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Net9Auth.API.Controllers.Authentication.Base;
 using Net9Auth.API.Infrastructure.ApiKeyAuthorizationFilters.Dynamic;
@@ -31,6 +32,7 @@ public class ExceptionLogController : CustomControllerBase
     }
     
     [HttpPost]
+    [Authorize]
     public async Task<PagedResultDto<ExceptionLogDto>> GetExceptionLogs(GetExceptionLogListDto dto)
     {
         

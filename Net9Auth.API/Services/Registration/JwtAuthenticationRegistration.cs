@@ -9,7 +9,6 @@ using static System.Threading.Tasks.Task;
 using static Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerDefaults;
 using ILogger = Serilog.ILogger;
 
-// using ILogger = Serilog.ILogger;
 // ReSharper disable TemplateIsNotCompileTimeConstantProblem
 
 namespace Net9Auth.API.Services.Registration;

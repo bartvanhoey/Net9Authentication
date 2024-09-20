@@ -53,6 +53,9 @@ public class ExceptionLogApiService : IExceptionLogApiService
             var dbEntity = await _db.ExceptionLogs.AddAsync(exceptionLog);
             
             await _db.SaveChangesAsync();
+            
+            Console.WriteLine($"{createDto.ExceptionType} from {createDto.ApplicationName} written to Database");
+            
             return Ok(_mapper.Map<ExceptionLog, ExceptionLogDto>(dbEntity.Entity));
         }
         catch (Exception exception)

@@ -18,9 +18,7 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     
     public DbSet<Log> Logs { get; set; }
     public DbSet<ApiKey> ApiKeys { get; set; }
-    
     public DbSet<ExceptionLog> ExceptionLogs { get; set; }
-    
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<ApiKey>().HasIndex(k => k.Key).IsUnique();

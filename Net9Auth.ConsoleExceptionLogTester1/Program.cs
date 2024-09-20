@@ -3,6 +3,7 @@
 using System.Net;
 using System.Net.Http.Json;
 using Net9Auth.ConsoleExceptionLogTester1;
+using Net9Auth.Shared.Infrastructure.Functional;
 using Net9Auth.Shared.Models.AggregateLogging.ExceptionLogging;
 using static System.Console;
 
@@ -47,7 +48,8 @@ while (true)
             ServerInfo = "Net9Auth.ConsoleExceptionLogTester1",
             CustomData = "always occurs at 2PM at night"
         };
-
+        
+        
         try
         {
             var httpClient = await new HttpService().GetHttpClientAsync(apiEndpoint, apiKey);
