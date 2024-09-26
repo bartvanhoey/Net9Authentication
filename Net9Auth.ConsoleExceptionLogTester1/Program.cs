@@ -8,7 +8,6 @@ using Net9Auth.Shared.Models.AggregateLogging.ExceptionLogging;
 using static System.Console;
 
 
-
 const string apiEndpoint = "https://localhost:7247/";
 const string apiKey =
     "50C2BA2DADE4E8DD1CCE9E350823242856AF830318E27EE0B6F401CC3C5A9C7D192EF79DB33CC4A940DE7F43A4F21BE1FBCDB65D0E4BEB382932F53FBAB904D3";
